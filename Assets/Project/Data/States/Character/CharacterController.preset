@@ -1,0 +1,220 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: CharacterController
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: d40eb3a23693dd24da26d06197bcf1e3,
+      type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: inputState.<Look>k__BackingField.x
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: inputState.<Look>k__BackingField.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: inputState.<JumpPressed>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: inputState.<CrouchPressed>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: inputState.<RunPressed>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: inputState.<DashPressed>k__BackingField
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: inputState.<Move>k__BackingField.x
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: inputState.<Move>k__BackingField.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: inputState.<ForwardRotation>k__BackingField.x
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: inputState.<ForwardRotation>k__BackingField.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: inputState.<ForwardRotation>k__BackingField.z
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: inputState.<ForwardRotation>k__BackingField.w
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: inputOffset
+    value: 0.2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: playerInput
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: <ShapeStates>k__BackingField.states.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: <ShapeStates>k__BackingField.states.Array.data[0].enable
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: <ShapeStates>k__BackingField.states.Array.data[0].blocked
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: <ShapeStates>k__BackingField.states.Array.data[0].forceEnable
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: <ShapeStates>k__BackingField.states.Array.data[0].name
+    value: Normal
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: <ShapeStates>k__BackingField.states.Array.data[0].value
+    value: 
+    objectReference: {fileID: 11400000, guid: 3a6d2532445198844802812f834df836, type: 2}
+  - target: {fileID: 0}
+    propertyPath: <ShapeStates>k__BackingField.states.Array.data[0].blockedBy.Array.size
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: <ShapeStates>k__BackingField.states.Array.data[0].blockedBy.Array.data[0]
+    value: Crouched
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: <ShapeStates>k__BackingField.states.Array.data[0].partOfStateList
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: <ShapeStates>k__BackingField.states.Array.data[1].enable
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: <ShapeStates>k__BackingField.states.Array.data[1].blocked
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: <ShapeStates>k__BackingField.states.Array.data[1].forceEnable
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: <ShapeStates>k__BackingField.states.Array.data[1].name
+    value: Crouched
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: <ShapeStates>k__BackingField.states.Array.data[1].value
+    value: 
+    objectReference: {fileID: 11400000, guid: fa5e9d3cb497920488ec53639b2d0591, type: 2}
+  - target: {fileID: 0}
+    propertyPath: <ShapeStates>k__BackingField.states.Array.data[1].blockedBy.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: <ShapeStates>k__BackingField.states.Array.data[1].partOfStateList
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: <MovementStates>k__BackingField.states.Array.size
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: <MovementStates>k__BackingField.states.Array.data[0].enable
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: <MovementStates>k__BackingField.states.Array.data[0].blocked
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: <MovementStates>k__BackingField.states.Array.data[0].forceEnable
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: <MovementStates>k__BackingField.states.Array.data[0].name
+    value: Default
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: <MovementStates>k__BackingField.states.Array.data[0].value
+    value: 
+    objectReference: {fileID: 11400000, guid: 372acc154d48dfa4096f52b5988d1acb, type: 2}
+  - target: {fileID: 0}
+    propertyPath: <MovementStates>k__BackingField.states.Array.data[0].blockedBy.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: <MovementStates>k__BackingField.states.Array.data[0].partOfStateList
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: <CurrentShapeState>k__BackingField
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: <CurrentMovementState>k__BackingField
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: root
+    value: -2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: <FixedUpdate>k__BackingField.autoUpdate
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: <FixedUpdate>k__BackingField.slicedUpdate
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: <FixedUpdate>k__BackingField.bucketCount
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: <Update>k__BackingField.autoUpdate
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: <Update>k__BackingField.slicedUpdate
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: <Update>k__BackingField.bucketCount
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: managedReferences[-2]
+    value: 
+    objectReference: {fileID: 0}
+  m_ExcludedProperties: []

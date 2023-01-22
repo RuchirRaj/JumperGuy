@@ -1,0 +1,22 @@
+{
+    "name": "RR.CharacterController.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:86aa668a8c281554da0bd57fd4a4d728",
+        "GUID:fec2d6f16d9b1bf49a47e95e7c90df33",
+        "GUID:e048eeec9bdb9d30448017b829deb3f6",
+        "GUID:4db1229c02f3f629bdd928353859c2b3",
+        "GUID:44073ee7f0a97204ea42b8285754ed05"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

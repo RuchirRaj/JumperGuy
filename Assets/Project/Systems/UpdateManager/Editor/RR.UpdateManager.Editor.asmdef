@@ -1,0 +1,19 @@
+{
+    "name": "RR.UpdateManager.Editor",
+    "rootNamespace": "RR.UpdateManager.Editor",
+    "references": [
+        "GUID:687b84d8088745798175b431de0fe594",
+        "GUID:4db1229c02f3f629bdd928353859c2b3"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
