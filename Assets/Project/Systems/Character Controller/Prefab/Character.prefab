@@ -104,8 +104,8 @@ MonoBehaviour:
     accelTime: 0.1
     decelTime: 0.1
     recenter: 1
-    recenterWait: 2
-    recenterTime: 10
+    recenterWait: 10
+    recenterTime: 2
     recenterValue: 0
     inputValue: 0
     outValue: 0

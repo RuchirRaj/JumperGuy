@@ -356,6 +356,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1668884782375496217, guid: f9b154510863e1642af14eb1082560c5,
         type: 3}
+      propertyPath: <Sensor>k__BackingField.shape
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1668884782375496217, guid: f9b154510863e1642af14eb1082560c5,
+        type: 3}
       propertyPath: <Sensor>k__BackingField.enableDebug
       value: 0
       objectReference: {fileID: 0}
