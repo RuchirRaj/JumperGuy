@@ -17,7 +17,9 @@ namespace RR.Gameplay.CharacterController
             Ground = 1 << 2,
             CenterOfMass = 1 << 3,
             Raycasts = 1 << 4,
-            All = Shape | Ground | CenterOfMass | Raycasts
+            InertialTensor = 1 << 5,
+            Torque = 1 << 6,
+            All = Shape | Ground | CenterOfMass | Raycasts | InertialTensor | Torque
         }
         
         [SerializeField] private bool enableGizmos = true;
@@ -96,6 +98,32 @@ namespace RR.Gameplay.CharacterController
             if ((flag & GizmoFlag.CenterOfMass) != 0)
                 using (draw.WithColor(Color.red))
                     draw.DrawSolidSphere(_rigidbody.worldCenterOfMass, Vector3.one * 0.05f);
+            
+            if((flag & GizmoFlag.Torque) != 0)
+            {
+                var worldCenterOfMass = _rigidbody.worldCenterOfMass;
+                draw.Arrow(worldCenterOfMass, worldCenterOfMass + _rotationTorque / _rigidbody.mass);
+            }
+            
+            if((flag & GizmoFlag.InertialTensor) != 0)
+                using (draw.InLocalSpace(transform))
+                {
+                    var centerOfMass = _rigidbody.centerOfMass;
+
+                    using (draw.WithColor(Color.red))
+                        draw.Arrow(centerOfMass, centerOfMass +
+                                                 _rigidbody.inertiaTensorRotation *
+                                                 (Vector3.right * _rigidbody.inertiaTensor.x) / 10);
+
+                    using (draw.WithColor(Color.green))
+                        draw.Arrow(centerOfMass, centerOfMass +
+                                                 _rigidbody.inertiaTensorRotation * (Vector3.up * _rigidbody.inertiaTensor.y)/ 10);
+                
+                    using (draw.WithColor(Color.blue))
+                        draw.Arrow(centerOfMass, centerOfMass +
+                                                 _rigidbody.inertiaTensorRotation * (Vector3.forward * _rigidbody.inertiaTensor.z)/ 10);
+                
+                }
         }
     }
 }

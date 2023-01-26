@@ -52,7 +52,7 @@ namespace RR.Gameplay.CharacterController
                     OnDash(obj);
                     break;
                 default:
-                    Debug.Log($"\"{obj.action.name}\" Not assigned a function");
+                    // Debug.Log($"\"{obj.action.name}\" Not assigned a function");
                     break;
             }
         }

@@ -30,6 +30,7 @@ namespace RR.Gameplay.CharacterController
         [field: SerializeField] public SpringSettings PositionSpring { get; private set;} = new() { damper = 0.75f, frequency = 10, useForce = false };
         [field: SerializeField] public SpringSettings RotationSpring { get; private set;} = new() { damper = 0.75f, frequency = 10, useForce = false };
         [field: SerializeField] public Vector3 TorqueScale { get; private set;} = new(1,1,1);
+        [field: SerializeField] public float TorqueClamp { get; private set;} = 100;
 
         
         [field: SerializeField] public ColliderType ShapeColliderType { get; set; }
@@ -124,6 +125,7 @@ namespace RR.Gameplay.CharacterController
         internal void S1_InitReferences()
         {
             _rigidbody = GetComponent<Rigidbody>();
+            _rigidbody.automaticCenterOfMass = false;
             if(!RefTransform)
             {
                 RefTransform = new GameObject($"{name}_RefTransform").transform;
@@ -211,10 +213,6 @@ namespace RR.Gameplay.CharacterController
                 _currentShape = Shape;
                 var shapeSettings = _currentShape;
                 
-                //Update Center of mass
-                {
-                    _rigidbody.centerOfMass = Vector3.up * (Shape.height * Shape.comHeight) + Offset;
-                }
 
                 switch (_currentColliderType)
                 {
@@ -258,6 +256,13 @@ namespace RR.Gameplay.CharacterController
                 }
 
                 Collider.sharedMaterial = shapeSettings.material;
+                
+                //Update Center of mass
+                {
+                    _rigidbody.centerOfMass = Vector3.up * (Shape.height * Shape.comHeight) + Offset;
+                    _rigidbody.ResetInertiaTensor();
+                }
+
             }
         }
 
@@ -359,9 +364,10 @@ namespace RR.Gameplay.CharacterController
         {
             _rotationTorque = MathUtils.SpringUtils.DampedTorsionalSpring(dt, RotationSpring.frequency,
                 RotationSpring.damper,
-                _rigidbody.rotation, RefTransform.rotation, -_rigidbody.angularVelocity, _rigidbody,
+                _rigidbody.rotation, RefTransform.rotation, -_rigidbody.angularVelocity,
                 RotationSpring.useForce);
             _rotationTorque.Scale(TorqueScale);
+            _rotationTorque = Vector3.ClampMagnitude(_rotationTorque, TorqueClamp * _rigidbody.mass);
         }
 
         #endregion
@@ -381,7 +387,7 @@ namespace RR.Gameplay.CharacterController
             _finalTorque = Vector3.zero;
             _finalTorque += _rotationTorque;
             
-            _rigidbody.AddTorque(_finalTorque, ForceMode.Force);
+            _rigidbody.AddTorque(_finalTorque, ForceMode.Acceleration);
             
             //Reset Movement Force
             _moveForce = Vector3.zero;

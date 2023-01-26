@@ -1,12 +1,14 @@
-﻿using UnityEngine;
+﻿using RR.Common;
+using UnityEngine;
 
 namespace RR.Gameplay.CharacterController
 {
     public partial class CharacterController
     {
-        [Space]
-        [SerializeField] private Vector3 gravity = new(0,-30F,0);
+        [Header("Gravity")] 
         [SerializeField] private float gravityMultiplier = 1;
+        [SerializeField] private int gravityMask = 1;
+        [field: SerializeField] public Vector3 ExternalGravity { get; set; } = new(0,-30F,0);
         private Vector3 _gravityForce;
         
         //Properties
@@ -20,12 +22,9 @@ namespace RR.Gameplay.CharacterController
 
         private void DetectGravity()
         {
-            _gravityForce = gravity * gravityMultiplier;
-        }
-
-        public void SetGravity(Vector3 value)
-        {
-            gravity = value;
+            _gravityForce = ExternalGravity +
+                            GravityManager.GetInstance().GetGravityAtPos(Rigidbody.worldCenterOfMass, gravityMask) *
+                            gravityMultiplier;
         }
     }
 }

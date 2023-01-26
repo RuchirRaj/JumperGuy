@@ -85,6 +85,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panAxis:
+    maxSpeed: 200
     gain: 12
     clamp: {x: -180, y: 180}
     wrap: 1
@@ -98,6 +99,7 @@ MonoBehaviour:
     outValue: 0
     range: {x: -180, y: 180}
   tiltAxis:
+    maxSpeed: 200
     gain: -12
     clamp: {x: -80, y: 80}
     wrap: 0
@@ -357,6 +359,7 @@ MonoBehaviour:
     frequency: 10
     damper: 0.75
   <TorqueScale>k__BackingField: {x: 1, y: 1, z: 1}
+  <TorqueClamp>k__BackingField: 100
   <ShapeColliderType>k__BackingField: 0
   <Shape>k__BackingField:
     radius: 0.25
@@ -366,7 +369,7 @@ MonoBehaviour:
     material: {fileID: 13400000, guid: 9c9c771374fc7db4b893443b5145b29f, type: 2}
   <Offset>k__BackingField: {x: 0, y: 0, z: 0}
   <FixedUpdate>k__BackingField:
-    autoUpdate: 1
+    autoUpdate: 0
     slicedUpdate: 0
     bucketCount: 0
   <RefTransform>k__BackingField: {fileID: 0}
@@ -390,13 +393,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookDirection: 0
-  stopRotatingByDefault: 0
+  stopRotatingByDefault: 1
   rotationSpeed: 15
   maxAngularVelocity: 15
   <RefTransform>k__BackingField: {fileID: 0}
   <BaseRefTransform>k__BackingField: {fileID: 0}
-  gravity: {x: 0, y: -20, z: 0}
   gravityMultiplier: 1
+  gravityMask: 1
+  <ExternalGravity>k__BackingField: {x: 0, y: -30, z: 0}
   inputState:
     <Look>k__BackingField: {x: 0, y: 0}
     <JumpPressed>k__BackingField: 0

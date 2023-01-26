@@ -15,6 +15,8 @@ namespace RR.Gameplay.CharacterController.Camera
             [Serializable]
             public class Axis
             {
+                [Min(0)]
+                public float maxSpeed = 200;
                 public float gain = 1;
                 [MinMaxSlider("@range", true)] public Vector2 clamp;
                 public bool wrap;
@@ -59,8 +61,7 @@ namespace RR.Gameplay.CharacterController.Camera
                 /// <param name="dt">current deltaTime</param>
                 /// <param name="axis">The InputAxisValue to update</param>
                 /// <param name="control">Parameter for controlling the behaviour of the axis</param>
-                public void ProcessInput(
-                    float dt)
+                public void ProcessInput(float dt)
                 {
                     var input = inputValue;
                     if (dt < 0)
@@ -84,6 +85,7 @@ namespace RR.Gameplay.CharacterController.Camera
                         }
                     }
 
+                    m_CurrentSpeed = Mathf.Clamp(m_CurrentSpeed, -maxSpeed, maxSpeed);
                     outValue = ClampValue(outValue + m_CurrentSpeed * dt);
                     
                     if (Mathf.Abs(inputValue) > k_Epsilon)

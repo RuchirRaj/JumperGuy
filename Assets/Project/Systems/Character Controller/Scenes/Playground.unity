@@ -3547,6 +3547,55 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &912993522
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 912993523}
+  - component: {fileID: 912993524}
+  m_Layer: 0
+  m_Name: Gravity Source
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &912993523
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912993522}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 25}
+  m_LocalScale: {x: 50, y: 10, z: 50}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1601161586}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &912993524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912993522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e8a5243f7ee4846ae36624537395097, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: {x: 0, y: -1, z: 0}
+  scale: {x: 1, y: 1, z: 1}
+  gravity: 10
+  runtimeGizmo: 0
+  editorGizmo: 1
 --- !u!43 &922053319
 Mesh:
   m_ObjectHideFlags: 0
@@ -6830,6 +6879,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panAxis:
+    maxSpeed: 200
     gain: 12
     clamp: {x: -180, y: 180}
     wrap: 1
@@ -6843,6 +6893,7 @@ MonoBehaviour:
     outValue: 0
     range: {x: -180, y: 180}
   tiltAxis:
+    maxSpeed: 200
     gain: -12
     clamp: {x: -80, y: 80}
     wrap: 0
@@ -10816,6 +10867,7 @@ Transform:
   - {fileID: 1380401825}
   - {fileID: 1991635176}
   - {fileID: 88025947}
+  - {fileID: 912993523}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16088,8 +16140,9 @@ MonoBehaviour:
   maxAngularVelocity: 15
   <RefTransform>k__BackingField: {fileID: 0}
   <BaseRefTransform>k__BackingField: {fileID: 0}
-  gravity: {x: 0, y: -20, z: 0}
   gravityMultiplier: 1
+  gravityMask: 1
+  <ExternalGravity>k__BackingField: {x: 0, y: -30, z: 0}
   inputState:
     <Look>k__BackingField: {x: 0, y: 0}
     <JumpPressed>k__BackingField: 0
@@ -16204,6 +16257,7 @@ MonoBehaviour:
     frequency: 10
     damper: 0.75
   <TorqueScale>k__BackingField: {x: 1, y: 1, z: 1}
+  <TorqueClamp>k__BackingField: 100
   <ShapeColliderType>k__BackingField: 0
   <Shape>k__BackingField:
     radius: 0.25

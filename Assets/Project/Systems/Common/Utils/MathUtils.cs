@@ -86,15 +86,7 @@ namespace RR.Utils
 
         public static class SpringUtils
         {
-            /// <summary>
-            /// Get Spring Stiffness and Damper value using frequency and damper (0, 1) value
-            /// </summary>
-            /// <param name="dt"></param>
-            /// <param name="frequency"></param>
-            /// <param name="damper"></param>
-            /// <param name="useForce"></param>
-            /// <returns></returns>
-            public static (float spring, float damper) GetSpringConstants(float dt, float frequency, float damper, bool useForce = false)
+            public static (float spring, float damper) GetStableSpringConstants(float dt, float mass, float frequency, float damper, bool useForce = false)
             {
                 var kp = useForce ? frequency : (6f * frequency) * (6f * frequency) * 0.25f;
                 var kd = useForce ? damper : 4.5f * frequency * damper;
@@ -104,6 +96,12 @@ namespace RR.Utils
                 float ksg = kp * g;
                 float kdg = (kd + kp * dt) * g;
 
+                if (ksg > mass / (dt * dt))
+                    ksg = mass / (dt * dt);
+                
+                if (kdg > mass / dt)
+                    kdg = mass / dt;
+                
                 return (ksg, kdg);
             }
 
@@ -120,7 +118,7 @@ namespace RR.Utils
             public static Vector3 DamperSpring(float dt, float f, float d, Vector3 deltaPos, Vector3 deltaVel,
                 bool useForce)
             {
-                var s = GetSpringConstants(dt, f, d, useForce);
+                var s = GetStableSpringConstants(dt, 1, f, d, useForce);
                 return deltaPos * s.spring + deltaVel * s.damper;
             }
 
@@ -134,7 +132,7 @@ namespace RR.Utils
             /// <returns></returns>
             public static Vector3 DamperSpring(float dt, SpringSettings spring, Vector3 deltaPos, Vector3 deltaVel)
             {
-                var s = GetSpringConstants(dt, spring.frequency, spring.damper, spring.useForce);
+                var s = GetStableSpringConstants(dt, 1, spring.frequency, spring.damper, spring.useForce);
                 return deltaPos * s.spring + deltaVel * s.damper;
             }
             
@@ -151,7 +149,7 @@ namespace RR.Utils
             public static float DamperSpring(float dt, float f, float d, float deltaPos, float deltaVel,
                 bool useForce)
             {
-                var s = GetSpringConstants(dt, f, d, useForce);
+                var s = GetStableSpringConstants(dt, 1,f, d, useForce);
                 return deltaPos * s.spring + deltaVel * s.damper;
             }
 
@@ -165,16 +163,17 @@ namespace RR.Utils
             /// <returns></returns>
             public static float DamperSpring(float dt, SpringSettings spring, float deltaPos, float deltaVel)
             {
-                var s = GetSpringConstants(dt, spring.frequency, spring.damper, spring.useForce);
+                var s = GetStableSpringConstants(dt, 1, spring.frequency, spring.damper, spring.useForce);
                 return deltaPos * s.spring + deltaVel * s.damper;
             }
             
+            //BUG rigidbody variant of DampedTorsionalSpring isn't stable
             
             public static Vector3 DampedTorsionalSpring(float dt, float f, float d, Quaternion currentRot,
                 Quaternion targetRot, Vector3 deltaRotVelocity, Rigidbody rigidbody, bool useForce)
             {
-                var deltaRot = QuaternionUtils.ShortestRotation(currentRot, targetRot);
-                var k = GetSpringConstants(dt, f, d, useForce);
+                var deltaRot = targetRot * Quaternion.Inverse(currentRot);
+                var k = GetStableSpringConstants(dt, 1, f, d, useForce);
 
                 // Q can be the-long-rotation-around-the-sphere eg. 350 degrees
                 // We want the equivalent short rotation eg. -10 degrees
@@ -189,7 +188,7 @@ namespace RR.Utils
                 }
                 deltaRot.ToAngleAxis (out var xMag, out var x);
                 x.Normalize ();
-                x *= Mathf.Deg2Rad;
+                xMag *= Mathf.Deg2Rad;
                 Vector3 torque = x * (k.spring * xMag) + k.damper * deltaRotVelocity;
                 Quaternion rotInertia2World = rigidbody.inertiaTensorRotation * currentRot;
                 torque = Quaternion.Inverse(rotInertia2World) * torque;
@@ -201,8 +200,8 @@ namespace RR.Utils
             public static Vector3 DampedTorsionalSpring(float dt, SpringSettings spring, Quaternion currentRot,
                 Quaternion targetRot, Vector3 deltaRotVelocity, Rigidbody rigidbody)
             {
-                var deltaRot = QuaternionUtils.ShortestRotation(currentRot, targetRot);
-                var k = GetSpringConstants(dt, spring.frequency, spring.damper, spring.useForce);
+                var deltaRot = targetRot * Quaternion.Inverse(currentRot);
+                var k = GetStableSpringConstants(dt, 1, spring.frequency, spring.damper, spring.useForce);
 
                 // Q can be the-long-rotation-around-the-sphere eg. 350 degrees
                 // We want the equivalent short rotation eg. -10 degrees
@@ -217,7 +216,7 @@ namespace RR.Utils
                 }
                 deltaRot.ToAngleAxis (out var xMag, out var x);
                 x.Normalize ();
-                x *= Mathf.Deg2Rad;
+                xMag *= Mathf.Deg2Rad;
                 Vector3 torque = x * (k.spring * xMag) + k.damper * deltaRotVelocity;
                 Quaternion rotInertia2World = rigidbody.inertiaTensorRotation * currentRot;
                 torque = Quaternion.Inverse(rotInertia2World) * torque;
@@ -229,8 +228,8 @@ namespace RR.Utils
             public static Vector3 DampedTorsionalSpring(float dt, float f, float d, Quaternion currentRot,
                 Quaternion targetRot, Vector3 deltaRotVelocity, bool useForce)
             {
-                var deltaRot = QuaternionUtils.ShortestRotation(currentRot, targetRot);
-                var k = GetSpringConstants(dt, f, d, useForce);
+                var deltaRot = targetRot * Quaternion.Inverse(currentRot);
+                var k = GetStableSpringConstants(dt, 1, f, d, useForce);
 
                 // Q can be the-long-rotation-around-the-sphere eg. 350 degrees
                 // We want the equivalent short rotation eg. -10 degrees
@@ -245,7 +244,7 @@ namespace RR.Utils
                 }
                 deltaRot.ToAngleAxis (out var xMag, out var x);
                 x.Normalize ();
-                x *= Mathf.Deg2Rad;
+                xMag *= Mathf.Deg2Rad;
                 Vector3 torque = x * (k.spring * xMag) + k.damper * deltaRotVelocity;
                 return torque;
             }
@@ -253,8 +252,8 @@ namespace RR.Utils
             public static Vector3 DampedTorsionalSpring(float dt, SpringSettings spring, Quaternion currentRot,
                 Quaternion targetRot, Vector3 deltaRotVelocity)
             {
-                var deltaRot = QuaternionUtils.ShortestRotation(currentRot, targetRot);
-                var k = GetSpringConstants(dt, spring.frequency, spring.damper, spring.useForce);
+                var deltaRot = targetRot * Quaternion.Inverse(currentRot);
+                var k = GetStableSpringConstants(dt, 1, spring.frequency, spring.damper, spring.useForce);
 
                 // Q can be the-long-rotation-around-the-sphere eg. 350 degrees
                 // We want the equivalent short rotation eg. -10 degrees
@@ -269,7 +268,7 @@ namespace RR.Utils
                 }
                 deltaRot.ToAngleAxis (out var xMag, out var x);
                 x.Normalize ();
-                x *= Mathf.Deg2Rad;
+                xMag *= Mathf.Deg2Rad;
                 Vector3 torque = x * (k.spring * xMag) + k.damper * deltaRotVelocity;
                 return torque;
             }
