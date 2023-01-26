@@ -11,7 +11,9 @@ Scene shows:
 - Sample Water Shader
 
 ### Scene 2 (Small Planet)
-![Alt text](/Recordings/Image Sequence_002_0000.png "Small Planet")
+<p align="center">
+  <img src="Recordings/Image Sequence_002_0000.png" width="400" title="hover text" alt="Planet Scene">
+</p>
 Scene shows:
 - Dynamic Gravity
 - Moving/Rotating platforms
@@ -20,5 +22,5 @@ Scene shows:
 None
 
 **Private Repository**  
-**Ruchir Raj**
+**By, Ruchir Raj**
 ****
