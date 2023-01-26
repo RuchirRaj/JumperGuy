@@ -16276,8 +16276,8 @@ MonoBehaviour:
   <GroundState>k__BackingField: 0
   enableDebug: 0
   enableGizmos: 1
-  enableRuntimeGizmos: 0
-  runtimeGizmoFlag: 10
+  enableRuntimeGizmos: 1
+  runtimeGizmoFlag: 110
 --- !u!54 &2043942196
 Rigidbody:
   m_ObjectHideFlags: 0
