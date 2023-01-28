@@ -51,6 +51,9 @@ namespace RR.Gameplay.CharacterController
         
         
         //Properties
+
+        public Vector3 GroundVel => _groundVel;
+        public Vector3 GroundAngularVel => _groundAngularVel;
         public bool HorizontalInputDetected => _horizontalInputsDetected;
         public Vector3 MoveDirection
         {

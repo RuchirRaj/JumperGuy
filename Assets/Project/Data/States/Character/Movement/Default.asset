@@ -17,7 +17,7 @@ MonoBehaviour:
     value: 1
   maxSpeed:
     enable: 1
-    value: 1.5
+    value: 3
   maxAngularSpeed:
     enable: 1
     value: 10

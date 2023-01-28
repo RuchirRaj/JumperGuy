@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RR.Gameplay.CharacterController.Camera
 {
-    [AddComponentMenu("Ruchir/Character/Camera/Generic Camera")]
+    [AddComponentMenu("Ruchir/Character/Camera/Type/Generic Camera")]
     [SelectionBase]
     public class GenericCharacterCamera : MonoBehaviour, IBatchLateUpdate
     {

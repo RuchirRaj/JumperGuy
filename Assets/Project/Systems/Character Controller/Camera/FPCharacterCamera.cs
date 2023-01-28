@@ -9,7 +9,7 @@ namespace RR.Gameplay.CharacterController.Camera
 {
     namespace RR.Gameplay.Camera
     {
-        [AddComponentMenu("Ruchir/Character/Camera/FP Camera")]
+        [AddComponentMenu("Ruchir/Character/Camera/Type/First Person Camera")]
         public class PlayerFPCamera : MonoBehaviour, IBatchLateUpdate
         {
             [Serializable]

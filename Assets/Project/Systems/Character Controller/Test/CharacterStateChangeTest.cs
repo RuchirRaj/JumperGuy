@@ -42,7 +42,7 @@ namespace RR.Gameplay.CharacterController.Test
             if (!changePose || !camParent) return;
             if(_currentShape.ShapeEquals(controller.Base.Shape)) return;
             _currentShape = controller.Base.Shape;
-            camParent.DOLocalMoveY(_currentShape.height - _currentShape.radius, camDuration).SetEase(camEase);
+            // camParent.DOLocalMoveY(_currentShape.height - _currentShape.radius, camDuration).SetEase(camEase);
         }
 
         private void OnEnable()

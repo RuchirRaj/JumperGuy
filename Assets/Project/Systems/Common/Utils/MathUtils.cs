@@ -114,7 +114,7 @@ namespace RR.Utils
             /// <param name="deltaPos"></param>
             /// <param name="deltaVel"></param>
             /// <param name="useForce"></param>
-            /// <returns></returns>
+            /// <returns>Spring Force</returns>
             public static Vector3 DamperSpring(float dt, float f, float d, Vector3 deltaPos, Vector3 deltaVel,
                 bool useForce)
             {
@@ -129,7 +129,7 @@ namespace RR.Utils
             /// <param name="spring"></param>
             /// <param name="deltaPos"></param>
             /// <param name="deltaVel"></param>
-            /// <returns></returns>
+            /// <returns>Spring Force</returns>
             public static Vector3 DamperSpring(float dt, SpringSettings spring, Vector3 deltaPos, Vector3 deltaVel)
             {
                 var s = GetStableSpringConstants(dt, 1, spring.frequency, spring.damper, spring.useForce);
@@ -145,7 +145,7 @@ namespace RR.Utils
             /// <param name="deltaPos"></param>
             /// <param name="deltaVel"></param>
             /// <param name="useForce"></param>
-            /// <returns></returns>
+            /// <returns>Spring Force</returns>
             public static float DamperSpring(float dt, float f, float d, float deltaPos, float deltaVel,
                 bool useForce)
             {
@@ -160,7 +160,7 @@ namespace RR.Utils
             /// <param name="spring"></param>
             /// <param name="deltaPos"></param>
             /// <param name="deltaVel"></param>
-            /// <returns></returns>
+            /// <returns>Spring Force</returns>
             public static float DamperSpring(float dt, SpringSettings spring, float deltaPos, float deltaVel)
             {
                 var s = GetStableSpringConstants(dt, 1, spring.frequency, spring.damper, spring.useForce);
@@ -169,6 +169,18 @@ namespace RR.Utils
             
             //BUG rigidbody variant of DampedTorsionalSpring isn't stable
             
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="dt"></param>
+            /// <param name="f"></param>
+            /// <param name="d"></param>
+            /// <param name="currentRot"></param>
+            /// <param name="targetRot"></param>
+            /// <param name="deltaRotVelocity"></param>
+            /// <param name="rigidbody"></param>
+            /// <param name="useForce"></param>
+            /// <returns>Torque Force</returns>
             public static Vector3 DampedTorsionalSpring(float dt, float f, float d, Quaternion currentRot,
                 Quaternion targetRot, Vector3 deltaRotVelocity, Rigidbody rigidbody, bool useForce)
             {
@@ -197,6 +209,16 @@ namespace RR.Utils
                 return torque;
             }
             
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="dt"></param>
+            /// <param name="spring"></param>
+            /// <param name="currentRot"></param>
+            /// <param name="targetRot"></param>
+            /// <param name="deltaRotVelocity"></param>
+            /// <param name="rigidbody"></param>
+            /// <returns>Torque Force</returns>
             public static Vector3 DampedTorsionalSpring(float dt, SpringSettings spring, Quaternion currentRot,
                 Quaternion targetRot, Vector3 deltaRotVelocity, Rigidbody rigidbody)
             {
@@ -225,6 +247,17 @@ namespace RR.Utils
                 return torque;
             }
             
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="dt"></param>
+            /// <param name="f"></param>
+            /// <param name="d"></param>
+            /// <param name="currentRot"></param>
+            /// <param name="targetRot"></param>
+            /// <param name="deltaRotVelocity"></param>
+            /// <param name="useForce"></param>
+            /// <returns>Torque Force</returns>
             public static Vector3 DampedTorsionalSpring(float dt, float f, float d, Quaternion currentRot,
                 Quaternion targetRot, Vector3 deltaRotVelocity, bool useForce)
             {
@@ -249,6 +282,15 @@ namespace RR.Utils
                 return torque;
             }
             
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="dt"></param>
+            /// <param name="spring"></param>
+            /// <param name="currentRot"></param>
+            /// <param name="targetRot"></param>
+            /// <param name="deltaRotVelocity"></param>
+            /// <returns>Torque Force</returns>
             public static Vector3 DampedTorsionalSpring(float dt, SpringSettings spring, Quaternion currentRot,
                 Quaternion targetRot, Vector3 deltaRotVelocity)
             {

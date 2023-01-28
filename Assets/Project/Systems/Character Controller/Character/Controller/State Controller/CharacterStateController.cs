@@ -12,20 +12,7 @@ namespace RR.Gameplay.CharacterController.StateController
     {
         private CharacterController _controller;
         private CharacterBase _base;
-
-        private int _movementIndex, _shapeIndex;
-
-        //Private
-        [SerializeField]
-        private bool enableDebug;
         
-        [CustomTitle("Settings", 1f, 0.73f, 0.6f)]
-        [field: SerializeField]
-        public State<MovementState> MovementState { get; private set; } = new() { Name = "DynamicMovement", blockedBy = new List<string>(0) };
-
-        [field: SerializeField]
-        public State<ShapeState> ShapeState { get; private set; } = new() { Name = "DynamicShape", blockedBy = new List<string>(0)};
-
         public float test;
         
         private void OnEnable()
@@ -50,13 +37,8 @@ namespace RR.Gameplay.CharacterController.StateController
             if(_controller)
                 _controller.StateUpdateAction -= UpdateState;
         }
-
-        private void UpdateState(float dt, float sdt)
-        {
-            
-        }
         
-
+        
         private void Start()
         {
             _movementIndex = _controller.MovementStates.AddState(MovementState);
