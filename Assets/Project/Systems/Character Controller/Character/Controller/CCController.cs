@@ -42,7 +42,7 @@ namespace RR.Gameplay.CharacterController
         private Vector3 _moveInput;
         private Vector3 _moveDirection;
         private Vector3 _horizontalForce;
-        private Vector3 _groundVel, _groundAngularVel;
+        private Vector3 _groundVel, _groundAngularVel, _groundVelUnProcessed;
         private Vector3 _targetVelocity;
         private Vector3 _finalForce;
 
@@ -53,6 +53,7 @@ namespace RR.Gameplay.CharacterController
         //Properties
 
         public Vector3 GroundVel => _groundVel;
+        public Vector3 GroundVelUnProcessed => _groundVelUnProcessed;
         public Vector3 GroundAngularVel => _groundAngularVel;
         public bool HorizontalInputDetected => _horizontalInputsDetected;
         public Vector3 MoveDirection
@@ -343,6 +344,7 @@ namespace RR.Gameplay.CharacterController
         {
             var vel = Vector3.zero;
             var averageHit = Base.Sensor.averageHit;
+            _groundVelUnProcessed = Vector3.zero;
             // Moving platforms
             if (averageHit.valid)
             {
@@ -350,6 +352,7 @@ namespace RR.Gameplay.CharacterController
                 if (rb != null)
                 {
                     vel = rb.GetPointVelocity(averageHit.point);
+                    _groundVelUnProcessed = vel;
                     vel = Vector3.ProjectOnPlane(vel, averageHit.normal);
                     // return PhysicsUtils.GetRelativePointVelocity(transform, _groundHit.collider.gameObject, _groundHit.point);
                 }

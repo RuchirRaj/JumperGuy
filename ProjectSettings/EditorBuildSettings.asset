@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Project/Systems/Character Controller/Scenes/Playground.unity
     guid: 129a336a0e826c1458ac2ab8b65d745e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Project/Systems/Character Controller/Scenes/Playground_1.unity
     guid: ffa5e1fcb7c21a548b33f83eb59082a0
   m_configObjects:

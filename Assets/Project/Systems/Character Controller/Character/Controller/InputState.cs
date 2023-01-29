@@ -9,6 +9,7 @@ namespace RR.Gameplay.CharacterController
         //Properties
         [field: SerializeField] public Vector2 Look { get; private set; }
         [field: SerializeField] public bool JumpPressed { get; private set; }
+        [field: SerializeField] public bool CamPressed { get; private set; }
         [field: SerializeField] public bool CrouchPressed { get; private set; }
         [field: SerializeField] public bool RunPressed { get; private set; }
         [field: SerializeField] public bool DashPressed { get; private set; }
@@ -18,11 +19,13 @@ namespace RR.Gameplay.CharacterController
         //Events
         public Action<bool> onCrouchEvent;
         public Action<bool> onRunEvent;
+        public Action<bool> onCamEvent;
         public Action<bool> onJumpEvent;
         public Action<bool> onDashEvent;
         
         //Input Events
         public (bool valid, bool value) onJumpTuple;
+        public (bool valid, bool value) onCamTuple;
         public (bool valid, bool value) onRunTuple;
         public (bool valid, bool value) onDashTuple;
         public (bool valid, bool value) onCrouchTuple;
@@ -35,6 +38,7 @@ namespace RR.Gameplay.CharacterController
         {
             Look = source.Look;
             JumpPressed = source.JumpPressed;
+            CamPressed = source.CamPressed;
             CrouchPressed = source.CrouchPressed;
             RunPressed = source.RunPressed;
             DashPressed = source.DashPressed;
@@ -42,6 +46,7 @@ namespace RR.Gameplay.CharacterController
             ForwardRotation = source.ForwardRotation;
             
             onJumpTuple = source.onJumpTuple;
+            onCamTuple = source.onCamTuple;
             onRunTuple = source.onRunTuple;
             onDashTuple = source.onDashTuple;
             onCrouchTuple = source.onCrouchTuple;
@@ -56,6 +61,15 @@ namespace RR.Gameplay.CharacterController
                 onJumpEvent?.Invoke(value);
             }
             JumpPressed = value;
+        }
+        public void INPUT_Cam(bool value)
+        {
+            if(value != CamPressed)
+            {
+                onCamTuple = (true, value);
+                onCamEvent?.Invoke(value);
+            }
+            CamPressed = value;
         }
 
         public void INPUT_Dash(bool value)
@@ -99,6 +113,7 @@ namespace RR.Gameplay.CharacterController
         public void ResetState()
         {
             onJumpTuple = (false, false);
+            onCamTuple = (false, false);
             onRunTuple = (false, false);
             onDashTuple = (false, false);
             onCrouchTuple = (false, false);

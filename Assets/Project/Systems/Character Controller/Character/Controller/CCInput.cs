@@ -51,6 +51,9 @@ namespace RR.Gameplay.CharacterController
                 case "Dash":
                     OnDash(obj);
                     break;
+                case "Cam":
+                    OnCam(obj);
+                    break;
                 default:
                     // Debug.Log($"\"{obj.action.name}\" Not assigned a function");
                     break;
@@ -98,6 +101,10 @@ namespace RR.Gameplay.CharacterController
         public void OnDash(InputAction.CallbackContext context)
         {
             inputState.INPUT_Dash(context.performed);
+        }
+        public void OnCam(InputAction.CallbackContext context)
+        {
+            inputState.INPUT_Cam(context.performed);
         }
 
         #region Send Message

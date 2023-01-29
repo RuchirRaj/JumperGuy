@@ -1,74 +1,14 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using Cinemachine;
+using RR.Attributes;
 using RR.UpdateSystem;
 using RR.Utils;
 using UnityEngine;
 
 namespace RR.Gameplay.CharacterController.Camera
 {
-    [Serializable]
-    public class CameraSpring
-    {
-        public SpringSettings positionSpring, angularSpring;
-        public Vector3 pivotPos;
-        public Vector3 pos, targetPos;
-        public Quaternion rot, targetRot;
-
-        public Vector3 velocity, angularVelocity;
-        public Vector3 force, torque;
-
-        public void Update(float dt, Transform transform)
-        {
-            pos = transform.localPosition;
-            rot = transform.localRotation;
-            //Rotation Spring around Pivot
-            {
-                torque = MathUtils.SpringUtils.DampedTorsionalSpring(dt, angularSpring, rot, targetRot, -angularVelocity);
-                angularVelocity += torque * dt;
-                MathUtils.RotateAroundPivot(ref rot, ref pos, transform.TransformPoint(pivotPos),
-                    Quaternion.AngleAxis(angularVelocity.magnitude * Mathf.Rad2Deg * dt, angularVelocity.normalized));
-            }
-            //Position Spring
-            {
-                var deltaPos = targetPos - transform.parent.InverseTransformPoint(transform.TransformPoint(pivotPos));
-                force = MathUtils.SpringUtils.DamperSpring(dt, positionSpring, deltaPos, -velocity);
-                velocity += force * dt;
-                pos += velocity * dt;
-            }
-        }
-
-        public void AddForce(Vector3 value, ForceMode mode, float dt)
-        {
-            switch (mode)
-            {
-                case ForceMode.Acceleration:
-                case ForceMode.Force:
-                    velocity += value * dt;
-                    break;
-                case ForceMode.Impulse:
-                case ForceMode.VelocityChange:
-                    velocity += value;
-                    break;
-            }
-        }
-
-        public void AddTorque(Vector3 value, ForceMode mode, float dt)
-        {
-            switch (mode)
-            {
-                case ForceMode.Acceleration:
-                case ForceMode.Force:
-                    angularVelocity += value * dt;
-                    break;
-                case ForceMode.Impulse:
-                case ForceMode.VelocityChange:
-                    angularVelocity += value;
-                    break;
-            }
-        }
-    }
-    
-    [AddComponentMenu("Ruchir/Character/Camera/Camera Controller")]
-    public class PlayerCameraController : MonoBehaviour, IBatchLateUpdate
+    [AddComponentMenu("Ruchir/Character/Camera/Camera Manager")]
+    public class PlayerCameraManager : MonoBehaviour, IBatchLateUpdate
     {
         
         [field: SerializeField]
@@ -99,8 +39,11 @@ namespace RR.Gameplay.CharacterController.Camera
         [field: SerializeField] public float BobExtraSpeed { get; set; } = 2;
         [field: SerializeField] public Vector4 BobAmplitude { get; private set; }
         [field: SerializeField] public Vector4 BobRate { get; private set; }
+        [field: Space(10)]
+        [field: SerializeField] public List<PlayerCameraBase> cameras = new();
 
         [Space]
+        [CustomTitle("Update", 1f, 0.79f, 0.98f)]
         public UpdateMethod lateUpdate = new() { autoUpdate = true };
 
         //Private
@@ -109,17 +52,50 @@ namespace RR.Gameplay.CharacterController.Camera
         private Vector4 _currentBobAmp, _currentBobVal;
         private Vector4 _currentBobTime;
         private CameraSpring _bobSpring;
+        private int _currentCam;
         
         private void OnEnable()
         {
             _controller = GetComponentInParent<CharacterController>();
             _bobSpring ??= new CameraSpring();
+            _controller.InputState.onCamEvent += OnCamEvent;
             this.RegisterLateUpdate(lateUpdate);
+            SetActiveCamera(_currentCam, true);
         }
-
+        
         private void OnDisable()
         {
+            _controller.InputState.onCamEvent -= OnCamEvent;
             this.DeregisterLateUpdate();
+        }
+        
+        private void OnCamEvent(bool value)
+        {
+            if (value)
+                SetActiveCamera(_currentCam + 1);
+        }
+
+        private void SetActiveCamera(int index, bool forceDisable = false)
+        {
+            index %= cameras.Count;
+            Debug.Log(index);
+            
+            for (int i = 0; i < cameras.Count; i++)
+            {
+                if (i == index)
+                    cameras[i].SetActive(true, _controller);
+                else if(forceDisable || cameras[i].Active)
+                    cameras[i].SetActive(false, _controller);
+            }
+
+            _currentCam = index;
+        }
+
+        private void Start()
+        {
+            //TODO Add a proper way to manage active character reference
+            if (UnityEngine.Camera.main != null)
+                UnityEngine.Camera.main.GetComponent<CinemachineBrain>().WorldUpOverride = _controller.BaseRefTransform;
         }
 
         public void BatchLateUpdate(float dt, float sdt)

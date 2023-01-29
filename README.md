@@ -1,4 +1,16 @@
 # JumperGuy
+Sample project showcasing custom rigidbody based character controller.
+
+## Features
+| Feature           | Progress        | Description                                                                                                                                              |
+|:------------------|:----------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Dynamic Gravity` | **Done**        | Supports multiple overlapping gravity volumes with masking IDs,<br/>Rotate character according to current gravity.                                       |
+| `Step Offset`     | **Done**        | Supports Step offset using multiple raycasts for smooth step transition.                                                                                 |
+| `State System`    | **Done**        | Custom scriptable object based state system implemented as a standalone feature and can be easily extended to be used for custom classes.                |
+| `Update System`   | **Done**        | Custom Update manager to reduce reflection based Update Calls and add support for sliced Update<br/>Implemented as an **Standalone** System.             |
+| `Spring System`   | **In Progress** | A generic Spring System for versatile use.<br/>Used for :<br/> - Player Grounding Forces<br/> - Player rotation Torque<br/> - Procedural Camera Movement |
+
+
 ## ScreenShots
 ### Scene 1
 <p align="center">

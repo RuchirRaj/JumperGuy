@@ -6,34 +6,45 @@ namespace RR.Gameplay.CharacterController.Camera
 {
     [AddComponentMenu("Ruchir/Character/Camera/Type/Generic Camera")]
     [SelectionBase]
-    public class GenericCharacterCamera : MonoBehaviour, IBatchLateUpdate
+    public class GenericCharacterCamera : PlayerCameraBase
     {
+        
+        public override bool Active => _active;
+        
+        [Space(10)]
         public CharacterController controller;
         public CharacterController.LookDirection lookDirection = CharacterController.LookDirection.MovementDirection;
         [Space] 
         public CursorLockMode lockMode = CursorLockMode.Locked;
         public bool hideCursor = true;
-        [Space]
-        public UpdateMethod lateUpdate = new (){ autoUpdate = true };
         
+        //Private
         private CmCamera _camera;
+        private bool _active;
 
-        private void OnEnable()
+        protected override void OnEnable()
         {
+            base.OnEnable();
             _camera = GetComponent<CmCamera>();
-            this.RegisterLateUpdate(lateUpdate);
-            Cursor.lockState = lockMode;
-            Cursor.visible = !hideCursor;
-            controller.lookDirection = lookDirection;
+            _camera.enabled = _active;
         }
 
-        private void OnDisable()
+        public override void SetActive(bool value, CharacterController characterController)
         {
-            this.DeregisterLateUpdate();
+            controller = characterController;
+            if (value)
+            {
+                Cursor.lockState = lockMode;
+                Cursor.visible = !hideCursor;
+                controller.lookDirection = lookDirection;
+            }
+            _active = value;
+            _camera.enabled = value;
         }
 
-        public void BatchLateUpdate(float dt, float sdt)
+        public override void BatchLateUpdate(float dt, float sdt)
         {
+            if(!_active) return;
             if(controller == null)
                 return;
             controller.InputState.INPUT_ForwardRotation(_camera.State.RawOrientation);
