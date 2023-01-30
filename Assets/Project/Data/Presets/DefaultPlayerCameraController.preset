@@ -55,286 +55,222 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: angularSpring.frequency
-    value: 10
+    value: 4
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: angularSpring.damper
     value: 0.75
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <Bob>k__BackingField
+    propertyPath: bob
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobAmpMultiplier>k__BackingField
-    value: 1.5
+    propertyPath: bobAmpMultiplier
+    value: 2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobRateMultiplier>k__BackingField
-    value: 1.5
+    propertyPath: bobMultiplierOverSpeed.m_Curve.Array.size
+    value: 2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobMultiplierOverSpeed>k__BackingField.m_Curve.Array.size
-    value: 3
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobMultiplierOverSpeed>k__BackingField.m_Curve.Array.data[0].time
+    propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[0].time
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobMultiplierOverSpeed>k__BackingField.m_Curve.Array.data[0].value
+    propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[0].value
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobMultiplierOverSpeed>k__BackingField.m_Curve.Array.data[0].inSlope
+    propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[0].inSlope
+    value: 0.33962265
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[0].outSlope
+    value: 0.33962265
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[0].tangentMode
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobMultiplierOverSpeed>k__BackingField.m_Curve.Array.data[0].outSlope
+    propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[0].weightedMode
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobMultiplierOverSpeed>k__BackingField.m_Curve.Array.data[0].tangentMode
+    propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[0].inWeight
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobMultiplierOverSpeed>k__BackingField.m_Curve.Array.data[0].weightedMode
-    value: 0
+    propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[0].outWeight
+    value: 0.0625
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobMultiplierOverSpeed>k__BackingField.m_Curve.Array.data[0].inWeight
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobMultiplierOverSpeed>k__BackingField.m_Curve.Array.data[0].outWeight
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobMultiplierOverSpeed>k__BackingField.m_Curve.Array.data[1].time
-    value: 3
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobMultiplierOverSpeed>k__BackingField.m_Curve.Array.data[1].value
-    value: 1.2
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobMultiplierOverSpeed>k__BackingField.m_Curve.Array.data[1].inSlope
-    value: 0.0944873
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobMultiplierOverSpeed>k__BackingField.m_Curve.Array.data[1].outSlope
-    value: 0.0944873
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobMultiplierOverSpeed>k__BackingField.m_Curve.Array.data[1].tangentMode
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobMultiplierOverSpeed>k__BackingField.m_Curve.Array.data[1].weightedMode
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobMultiplierOverSpeed>k__BackingField.m_Curve.Array.data[1].inWeight
-    value: 0.33333334
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobMultiplierOverSpeed>k__BackingField.m_Curve.Array.data[1].outWeight
-    value: 0.22493699
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobMultiplierOverSpeed>k__BackingField.m_Curve.Array.data[2].time
+    propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[1].time
     value: 8
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobMultiplierOverSpeed>k__BackingField.m_Curve.Array.data[2].value
+    propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[1].value
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[1].inSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[1].outSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[1].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[1].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[1].inWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[1].outWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: bobMultiplierOverSpeed.m_PreInfinity
     value: 2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobMultiplierOverSpeed>k__BackingField.m_Curve.Array.data[2].inSlope
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobMultiplierOverSpeed>k__BackingField.m_Curve.Array.data[2].outSlope
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobMultiplierOverSpeed>k__BackingField.m_Curve.Array.data[2].tangentMode
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobMultiplierOverSpeed>k__BackingField.m_Curve.Array.data[2].weightedMode
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobMultiplierOverSpeed>k__BackingField.m_Curve.Array.data[2].inWeight
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobMultiplierOverSpeed>k__BackingField.m_Curve.Array.data[2].outWeight
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobMultiplierOverSpeed>k__BackingField.m_PreInfinity
+    propertyPath: bobMultiplierOverSpeed.m_PostInfinity
     value: 2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobMultiplierOverSpeed>k__BackingField.m_PostInfinity
-    value: 2
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobMultiplierOverSpeed>k__BackingField.m_RotationOrder
+    propertyPath: bobMultiplierOverSpeed.m_RotationOrder
     value: 4
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobRateOverSpeed>k__BackingField.m_Curve.Array.size
-    value: 3
+    propertyPath: bobRateMultiplier
+    value: 2.5
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobRateOverSpeed>k__BackingField.m_Curve.Array.data[0].time
+    propertyPath: bobRateOverSpeed.m_Curve.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: bobRateOverSpeed.m_Curve.Array.data[0].time
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobRateOverSpeed>k__BackingField.m_Curve.Array.data[0].value
-    value: 0.5
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobRateOverSpeed>k__BackingField.m_Curve.Array.data[0].inSlope
+    propertyPath: bobRateOverSpeed.m_Curve.Array.data[0].value
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobRateOverSpeed>k__BackingField.m_Curve.Array.data[0].outSlope
+    propertyPath: bobRateOverSpeed.m_Curve.Array.data[0].inSlope
+    value: 0.33962265
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: bobRateOverSpeed.m_Curve.Array.data[0].outSlope
+    value: 0.33962265
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: bobRateOverSpeed.m_Curve.Array.data[0].tangentMode
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobRateOverSpeed>k__BackingField.m_Curve.Array.data[0].tangentMode
+    propertyPath: bobRateOverSpeed.m_Curve.Array.data[0].weightedMode
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobRateOverSpeed>k__BackingField.m_Curve.Array.data[0].weightedMode
+    propertyPath: bobRateOverSpeed.m_Curve.Array.data[0].inWeight
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobRateOverSpeed>k__BackingField.m_Curve.Array.data[0].inWeight
-    value: 0
+    propertyPath: bobRateOverSpeed.m_Curve.Array.data[0].outWeight
+    value: 0.0625
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobRateOverSpeed>k__BackingField.m_Curve.Array.data[0].outWeight
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobRateOverSpeed>k__BackingField.m_Curve.Array.data[1].time
-    value: 3
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobRateOverSpeed>k__BackingField.m_Curve.Array.data[1].value
-    value: 1.2
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobRateOverSpeed>k__BackingField.m_Curve.Array.data[1].inSlope
-    value: 0.0944873
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobRateOverSpeed>k__BackingField.m_Curve.Array.data[1].outSlope
-    value: 0.0944873
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobRateOverSpeed>k__BackingField.m_Curve.Array.data[1].tangentMode
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobRateOverSpeed>k__BackingField.m_Curve.Array.data[1].weightedMode
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobRateOverSpeed>k__BackingField.m_Curve.Array.data[1].inWeight
-    value: 0.33333334
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobRateOverSpeed>k__BackingField.m_Curve.Array.data[1].outWeight
-    value: 0.22493699
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobRateOverSpeed>k__BackingField.m_Curve.Array.data[2].time
+    propertyPath: bobRateOverSpeed.m_Curve.Array.data[1].time
     value: 8
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobRateOverSpeed>k__BackingField.m_Curve.Array.data[2].value
+    propertyPath: bobRateOverSpeed.m_Curve.Array.data[1].value
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: bobRateOverSpeed.m_Curve.Array.data[1].inSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: bobRateOverSpeed.m_Curve.Array.data[1].outSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: bobRateOverSpeed.m_Curve.Array.data[1].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: bobRateOverSpeed.m_Curve.Array.data[1].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: bobRateOverSpeed.m_Curve.Array.data[1].inWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: bobRateOverSpeed.m_Curve.Array.data[1].outWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: bobRateOverSpeed.m_PreInfinity
     value: 2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobRateOverSpeed>k__BackingField.m_Curve.Array.data[2].inSlope
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobRateOverSpeed>k__BackingField.m_Curve.Array.data[2].outSlope
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobRateOverSpeed>k__BackingField.m_Curve.Array.data[2].tangentMode
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobRateOverSpeed>k__BackingField.m_Curve.Array.data[2].weightedMode
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobRateOverSpeed>k__BackingField.m_Curve.Array.data[2].inWeight
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobRateOverSpeed>k__BackingField.m_Curve.Array.data[2].outWeight
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobRateOverSpeed>k__BackingField.m_PreInfinity
+    propertyPath: bobRateOverSpeed.m_PostInfinity
     value: 2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobRateOverSpeed>k__BackingField.m_PostInfinity
-    value: 2
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <BobRateOverSpeed>k__BackingField.m_RotationOrder
+    propertyPath: bobRateOverSpeed.m_RotationOrder
     value: 4
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobChangeSpeed>k__BackingField
-    value: 0.1
+    propertyPath: bobChangeSpeed
+    value: 2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobExtraSpeed>k__BackingField
+    propertyPath: bobExtraSpeed
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobAmplitude>k__BackingField.x
+    propertyPath: bobAmplitude.x
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobAmplitude>k__BackingField.y
+    propertyPath: bobAmplitude.y
     value: 0.5
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobAmplitude>k__BackingField.z
+    propertyPath: bobAmplitude.z
     value: 0.1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobAmplitude>k__BackingField.w
+    propertyPath: bobAmplitude.w
     value: 0.1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobRate>k__BackingField.x
+    propertyPath: bobRate.x
     value: 0.5
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobRate>k__BackingField.y
+    propertyPath: bobRate.y
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobRate>k__BackingField.z
+    propertyPath: bobRate.z
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <BobRate>k__BackingField.w
+    propertyPath: bobRate.w
     value: 0.5
     objectReference: {fileID: 0}
   - target: {fileID: 0}

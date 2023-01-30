@@ -17,30 +17,33 @@ namespace RR.Gameplay.CharacterController.Camera
         public SpringSettings positionSpring;
         public SpringSettings angularSpring;
 
-        [field: Space] 
-        [field: SerializeField] public bool Bob { get; set; } = true;
-        [field: SerializeField] public float BobAmpMultiplier { get; set; } = 1;
-        [field: SerializeField] public float BobRateMultiplier { get; set; } = 1;
-        [field: SerializeField] public AnimationCurve BobMultiplierOverSpeed { get; set; } = new()
+        [Space] 
+        public bool bob = true;
+        [Range(0,10)] public float bobAmpMultiplier = 1;
+        public AnimationCurve bobMultiplierOverSpeed = new()
         {
             keys = new []
             {
                 new Keyframe(0, 0), new Keyframe(1,1)
             }
         };
-        [field: SerializeField] public AnimationCurve BobRateOverSpeed { get; set; } = new()
+
+        [Space]
+        [Range(0,10)] public float bobRateMultiplier = 1;
+        public AnimationCurve bobRateOverSpeed = new()
         {
             keys = new []
             {
                 new Keyframe(0, 0), new Keyframe(1,1)
             }
         };
-        [field: SerializeField] public float BobChangeSpeed { get; set; } = 2;
-        [field: SerializeField] public float BobExtraSpeed { get; set; } = 2;
-        [field: SerializeField] public Vector4 BobAmplitude { get; private set; }
-        [field: SerializeField] public Vector4 BobRate { get; private set; }
-        [field: Space(10)]
-        [field: SerializeField] public List<PlayerCameraBase> cameras = new();
+        [Space]
+        public float bobChangeSpeed = 2;
+        public float bobExtraSpeed = 2;
+        public Vector4 bobAmplitude = Vector4.one;
+        public Vector4 bobRate = Vector4.one;
+        [Space(10)]
+        public List<PlayerCameraBase> cameras = new();
 
         [Space]
         [CustomTitle("Update", 1f, 0.79f, 0.98f)]
@@ -128,38 +131,38 @@ namespace RR.Gameplay.CharacterController.Camera
 
         void UpdateBob(float dt, Vector3 vel)
         {
-            if (!Bob || BobAmplitude == Vector4.zero || BobRate == Vector4.zero)
+            if (!bob || bobAmplitude == Vector4.zero || bobRate == Vector4.zero)
                 return;
             
-            _bobSpeed = vel.magnitude + BobExtraSpeed;
+            _bobSpeed = vel.magnitude + bobExtraSpeed;
 
             // if speed is zero, this means we should just fade out the last stored
             // speed value. NOTE: it's important to clamp it to the current max input
             // velocity since the preset may have changed since last bob!
             if (_bobSpeed == 0)
-                _bobSpeed = Mathf.Min(_lastBobSpeed * (1 - (BobChangeSpeed * dt)), 0);
+                _bobSpeed = Mathf.Min(_lastBobSpeed * (1 - (bobChangeSpeed * dt)), 0);
 
-            var b = BobMultiplierOverSpeed.Evaluate(_bobSpeed);
+            var b = bobMultiplierOverSpeed.Evaluate(_bobSpeed);
             
-            _currentBobTime += BobRate * (BobRateOverSpeed.Evaluate(_bobSpeed) * BobRateMultiplier * dt);
+            _currentBobTime += bobRate * (bobRateOverSpeed.Evaluate(_bobSpeed) * bobRateMultiplier * dt);
 
             _currentBobTime = MathUtils.WrapValue(-TimeClamp, TimeClamp, _currentBobTime);
 
-            _currentBobAmp.x = (b * (BobAmplitude.x));
+            _currentBobAmp.x = (b * (bobAmplitude.x));
             _currentBobVal.x = (Mathf.Cos(_currentBobTime.x * 2 * Mathf.PI)) * _currentBobAmp.x * 10;
 
-            _currentBobAmp.y = (b * (BobAmplitude.y));
+            _currentBobAmp.y = (b * (bobAmplitude.y));
             _currentBobVal.y = (Mathf.Cos(_currentBobTime.y * 2 * Mathf.PI)) * _currentBobAmp.y * 10;
 
-            _currentBobAmp.z = (b * (BobAmplitude.z));
+            _currentBobAmp.z = (b * (bobAmplitude.z));
             _currentBobVal.z = (Mathf.Cos(_currentBobTime.z * 2 * Mathf.PI)) * _currentBobAmp.z * 10;
 
-            _currentBobAmp.w = (b * (BobAmplitude.w));
+            _currentBobAmp.w = (b * (bobAmplitude.w));
             _currentBobVal.w = (Mathf.Cos(_currentBobTime.w * 2 * Mathf.PI)) * _currentBobAmp.w * 10;
 
-            _bobSpring.AddForce(_currentBobVal * BobAmpMultiplier,
+            _bobSpring.AddForce(_currentBobVal * bobAmpMultiplier,
                 ForceMode.Force, dt);
-            _bobSpring.AddTorque(Vector3.forward * (_currentBobVal.w * BobAmpMultiplier),
+            _bobSpring.AddTorque(Vector3.forward * (_currentBobVal.w * bobAmpMultiplier),
                 ForceMode.Force, dt);
         }
     }

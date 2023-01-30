@@ -2836,43 +2836,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9351df59da34f5646b6f8bd693360a36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <RestPosition>k__BackingField: {x: 0, y: 0, z: 0}
-  <RestRotation>k__BackingField: {x: 0, y: 0, z: 0, w: 1}
+  restPosition: {x: 0, y: 0, z: 0}
+  restRotation: {x: 0, y: 0, z: 0, w: 1}
   positionSpring:
     useForce: 0
     frequency: 5
     damper: 0.75
   angularSpring:
     useForce: 0
-    frequency: 4.5
+    frequency: 6
     damper: 0.5
-  <Bob>k__BackingField: 1
-  <BobAmpMultiplier>k__BackingField: 0.6
-  <BobRateMultiplier>k__BackingField: 0.5
-  <BobMultiplierOverSpeed>k__BackingField:
+  bob: 1
+  bobAmpMultiplier: 1.5
+  bobMultiplierOverSpeed:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: 0.35921624
+      outSlope: 0.35921624
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 3
-      value: 1.2
-      inSlope: 0.0944873
-      outSlope: 0.0944873
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.22493699
+      outWeight: 0.054166667
     - serializedVersion: 3
       time: 8
-      value: 2
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -2882,30 +2872,22 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  <BobRateOverSpeed>k__BackingField:
+  bobRateMultiplier: 1
+  bobRateOverSpeed:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.5
-      inSlope: 0
-      outSlope: 0
+      value: 0
+      inSlope: 0.35921624
+      outSlope: 0.35921624
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 3
-      value: 1.2
-      inSlope: 0.0944873
-      outSlope: 0.0944873
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.22493699
+      outWeight: 0.054166667
     - serializedVersion: 3
       time: 8
-      value: 2
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -2915,20 +2897,20 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  <BobChangeSpeed>k__BackingField: 0.1
-  <BobExtraSpeed>k__BackingField: 0
-  <BobAmplitude>k__BackingField: {x: 0.5, y: 0.2, z: 0.2, w: 0.1}
-  <BobRate>k__BackingField: {x: 1.8, y: 0.9, z: 0.9, w: 0.9}
-  <Sway>k__BackingField: 1
-  <SwayMultiplier>k__BackingField: 1.5
-  <SwayLookMultiplier>k__BackingField: {x: 1, y: 1}
-  <RotationLookSway>k__BackingField: {x: 2.5, y: 2.5, z: 1.5}
-  <RotationStrafeSway>k__BackingField: {x: 1, y: 0, z: -2}
-  <RotationFallSway>k__BackingField: {x: 5, y: -1, z: 0}
-  <RotationSlopeSway>k__BackingField: 2
-  <PositionFallRetract>k__BackingField: 0.5
-  <PositionWalkSlide>k__BackingField: {x: 1, y: 2, z: 1}
-  <PivotOffset>k__BackingField: {x: 0.12, y: -0.37, z: 0.31}
+  bobChangeSpeed: 2
+  bobExtraSpeed: 0
+  bobAmplitude: {x: 0.5, y: 0.2, z: 0.2, w: 0.1}
+  bobRate: {x: 2, y: 1, z: 1, w: 1}
+  sway: 1
+  swayMultiplier: 3
+  swayLookMultiplier: {x: 2, y: 2}
+  rotationLookSway: {x: 1, y: 1, z: 2}
+  rotationStrafeSway: {x: 1, y: 1, z: 1}
+  rotationFallSway: {x: 2, y: -0.5, z: 0}
+  rotationSlopeSway: 2
+  positionFallRetract: 1
+  positionWalkSlide: {x: 2.5, y: 2, z: 2}
+  pivotOffset: {x: 0.15, y: -0.32, z: 0.22}
   lateUpdate:
     autoUpdate: 1
     slicedUpdate: 0
@@ -3029,8 +3011,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 525255651}
-  m_LocalRotation: {x: 0.10865026, y: -0.8290024, z: 0.1730174, w: 0.5205912}
-  m_LocalPosition: {x: 3.136578, y: 81.47, z: 21.878635}
+  m_LocalRotation: {x: -0.09611075, y: 0.86687064, z: -0.1837789, w: -0.4533469}
+  m_LocalPosition: {x: 3.4931605, y: 4.7199993, z: 25.030275}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -4297,7 +4279,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 961739749}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.25, y: 79.22, z: 19.75}
+  m_LocalPosition: {x: 0.45695406, y: 2.4699996, z: 22.426153}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11576,81 +11558,63 @@ MonoBehaviour:
     damper: 1
   angularSpring:
     useForce: 0
-    frequency: 10
+    frequency: 4
     damper: 0.75
-  <Bob>k__BackingField: 1
-  <BobAmpMultiplier>k__BackingField: 1.5
-  <BobRateMultiplier>k__BackingField: 1.5
-  <BobMultiplierOverSpeed>k__BackingField:
+  bob: 1
+  bobAmpMultiplier: 2
+  bobMultiplierOverSpeed:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: 0.375
+      outSlope: 0.375
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 3
-      value: 1.2
-      inSlope: 0.0944873
-      outSlope: 0.0944873
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.22493699
+      outWeight: 0.041666668
     - serializedVersion: 3
       time: 8
-      value: 2
-      inSlope: 0
-      outSlope: 0
+      value: 1
+      inSlope: 0.0024826275
+      outSlope: 0.0024826275
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.23750001
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  <BobRateOverSpeed>k__BackingField:
+  bobRateMultiplier: 2.5
+  bobRateOverSpeed:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.5
-      inSlope: 0
-      outSlope: 0
+      value: 0
+      inSlope: 0.375
+      outSlope: 0.375
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 3
-      value: 1.2
-      inSlope: 0.0944873
-      outSlope: 0.0944873
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.22493699
+      outWeight: 0.041666668
     - serializedVersion: 3
       time: 8
-      value: 2
-      inSlope: 0
-      outSlope: 0
+      value: 1
+      inSlope: 0.0024826275
+      outSlope: 0.0024826275
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.23750001
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  <BobChangeSpeed>k__BackingField: 0.1
-  <BobExtraSpeed>k__BackingField: 0
-  <BobAmplitude>k__BackingField: {x: 1, y: 0.5, z: 0.1, w: 0.1}
-  <BobRate>k__BackingField: {x: 0.5, y: 1, z: 1, w: 0.5}
+  bobChangeSpeed: 2
+  bobExtraSpeed: 0
+  bobAmplitude: {x: 1, y: 0.5, z: 0.1, w: 0.1}
+  bobRate: {x: 0.5, y: 1, z: 1, w: 0.5}
   cameras:
   - {fileID: 1438878011}
   - {fileID: 525255656}
@@ -17103,7 +17067,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2043942192}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.25, y: 77.75, z: 19.75}
+  m_LocalPosition: {x: 0.45695406, y: 0.9999995, z: 22.426153}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
