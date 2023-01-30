@@ -23,7 +23,7 @@ namespace RR.Gameplay.CharacterController.Camera
             {
                 torque = MathUtils.SpringUtils.DampedTorsionalSpring(dt, angularSpring, rot, targetRot, -angularVelocity);
                 angularVelocity += torque * dt;
-                MathUtils.RotateAroundPivot(ref rot, ref pos, transform.TransformPoint(pivotPos),
+                MathUtils.RotateAroundPivot(ref rot, ref pos, transform.parent.InverseTransformPoint(transform.TransformPoint(pivotPos)),
                     Quaternion.AngleAxis(angularVelocity.magnitude * Mathf.Rad2Deg * dt, angularVelocity.normalized));
             }
             //Position Spring

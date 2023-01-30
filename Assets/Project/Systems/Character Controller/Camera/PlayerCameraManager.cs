@@ -143,7 +143,7 @@ namespace RR.Gameplay.CharacterController.Camera
             
             _currentBobTime += BobRate * (BobRateOverSpeed.Evaluate(_bobSpeed) * BobRateMultiplier * dt);
 
-            _currentBobTime = WarpValue(-TimeClamp, TimeClamp, _currentBobTime);
+            _currentBobTime = MathUtils.WrapValue(-TimeClamp, TimeClamp, _currentBobTime);
 
             _currentBobAmp.x = (b * (BobAmplitude.x));
             _currentBobVal.x = (Mathf.Cos(_currentBobTime.x * 2 * Mathf.PI)) * _currentBobAmp.x * 10;
@@ -161,43 +161,6 @@ namespace RR.Gameplay.CharacterController.Camera
                 ForceMode.Force, dt);
             _bobSpring.AddTorque(Vector3.forward * (_currentBobVal.w * BobAmpMultiplier),
                 ForceMode.Force, dt);
-        }
-
-        public Vector4 WarpValue(Vector4 min, Vector4 max, Vector4 current)
-        {
-            var x = current.x;
-            if (current.x < min.x || current.x > max.x)
-            {
-                x -= min.x;
-                x %= (max.x - min.x);
-                x += min.x;
-            }
-
-            var y = current.y;
-            if (current.y < min.y || current.y > max.y)
-            {
-                y -= min.y;
-                y %= (max.y - min.y);
-                y += min.y;
-            }
-
-            var z = current.z;
-            if (current.z < min.z || current.z > max.z)
-            {
-                z -= min.z;
-                z %= (max.z - min.z);
-                z += min.z;
-            }
-
-            var w = current.w;
-            if (current.w < min.w || current.w > max.w)
-            {
-                w -= min.w;
-                w %= (max.w - min.w);
-                w += min.w;
-            }
-
-            return new(x, y, z, w);
         }
     }
 }

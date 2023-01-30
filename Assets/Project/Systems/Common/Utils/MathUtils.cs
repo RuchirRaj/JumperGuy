@@ -4,6 +4,42 @@ namespace RR.Utils
 {
     public static class MathUtils
     {
+        
+        public static float WrapValue(float min, float max, float value)
+        {
+            var x = value;
+            if (!(x < min) && !(x > max)) return x;
+            x -= min;
+            x %= (max - min);
+            x += min;
+
+            return x;
+        }
+
+        public static Vector2 WrapValue(Vector2 min, Vector2 max, Vector2 value)
+        {
+            return new Vector2(
+                WrapValue(min.x, max.x, value.x),
+                WrapValue(min.y, max.y, value.y));
+        }
+        
+        public static Vector3 WrapValue(Vector3 min, Vector3 max, Vector3 value)
+        {
+            return new Vector3(
+                WrapValue(min.x, max.x, value.x),
+                WrapValue(min.y, max.y, value.y),
+                WrapValue(min.z, max.z, value.z));
+        }
+        
+        public static Vector4 WrapValue(Vector4 min, Vector4 max, Vector4 value)
+        {
+            return new Vector4(
+                WrapValue(min.x, max.x, value.x),
+                WrapValue(min.y, max.y, value.y),
+                WrapValue(min.z, max.z, value.z),
+                WrapValue(min.w, max.w, value.w));
+        }
+        
         /// <summary>
         /// Rotate the vector to be tangential to normal along the (normal, Up) plane
         /// </summary>
