@@ -4,7 +4,13 @@ namespace RR.Utils
 {
     public static class MathUtils
     {
-
+        /// <summary>
+        /// Rotate the vector to be tangential to normal along the (normal, Up) plane
+        /// </summary>
+        /// <param name="vec"></param>
+        /// <param name="normal"></param>
+        /// <param name="up"></param>
+        /// <returns></returns>
         public static Vector3 ReorientToNormal(Vector3 vec, Vector3 normal, Vector3 up)
         {
             vec *= Mathf.Sign(Vector3.Dot(up, normal));

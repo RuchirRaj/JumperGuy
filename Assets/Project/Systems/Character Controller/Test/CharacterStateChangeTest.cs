@@ -28,7 +28,6 @@ namespace RR.Gameplay.CharacterController.Test
 
         private bool _moveStateEnabled;
         private bool _shapeStateEnabled;
-        private int _currentCam = 0;
         private ShapeSettings _currentShape;
 
         private void OnEnable()

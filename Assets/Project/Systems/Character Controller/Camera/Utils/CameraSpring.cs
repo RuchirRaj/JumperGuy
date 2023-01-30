@@ -34,6 +34,26 @@ namespace RR.Gameplay.CharacterController.Camera
                 pos += velocity * dt;
             }
         }
+        
+        public void Update(float dt, Quaternion r, Vector3 p)
+        {
+            pos = p;
+            rot = r;
+            //Rotation Spring around Pivot
+            {
+                torque = MathUtils.SpringUtils.DampedTorsionalSpring(dt, angularSpring, rot, targetRot, -angularVelocity);
+                angularVelocity += torque * dt;
+                MathUtils.RotateAroundPivot(ref rot, ref pos, pos + (rot * pivotPos),
+                    Quaternion.AngleAxis(angularVelocity.magnitude * Mathf.Rad2Deg * dt, angularVelocity.normalized));
+            }
+            //Position Spring
+            {
+                var deltaPos = targetPos - (pos + rot * pivotPos);
+                force = MathUtils.SpringUtils.DamperSpring(dt, positionSpring, deltaPos, -velocity);
+                velocity += force * dt;
+                pos += velocity * dt;
+            }
+        }
 
         public void AddForce(Vector3 value, ForceMode mode, float dt)
         {

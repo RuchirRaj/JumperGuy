@@ -3786,11 +3786,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e8a5243f7ee4846ae36624537395097, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  editorGizmo: 1
+  runtimeGizmo: 0
   direction: {x: 0, y: -1, z: 0}
   scale: {x: 1, y: 1, z: 1}
   gravity: 10
-  runtimeGizmo: 0
-  editorGizmo: 1
+  mask: 1
 --- !u!43 &922053319
 Mesh:
   m_ObjectHideFlags: 0
@@ -11188,7 +11189,7 @@ MonoBehaviour:
     frequency: 10
     damper: 0.75
   <Bob>k__BackingField: 1
-  <BobAmpMultiplier>k__BackingField: 1
+  <BobAmpMultiplier>k__BackingField: 1.5
   <BobRateMultiplier>k__BackingField: 1.5
   <BobMultiplierOverSpeed>k__BackingField:
     serializedVersion: 2
@@ -11258,8 +11259,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   <BobChangeSpeed>k__BackingField: 0.1
   <BobExtraSpeed>k__BackingField: 0
-  <BobAmplitude>k__BackingField: {x: 1, y: 1, z: 0.1, w: 0.5}
-  <BobRate>k__BackingField: {x: 0.5, y: 0.75, z: 0.5, w: 0.25}
+  <BobAmplitude>k__BackingField: {x: 1, y: 0.5, z: 0.1, w: 0.1}
+  <BobRate>k__BackingField: {x: 0.5, y: 1, z: 1, w: 0.5}
   cameras:
   - {fileID: 1438878011}
   - {fileID: 525255656}
@@ -16655,7 +16656,7 @@ MonoBehaviour:
   <RefTransform>k__BackingField: {fileID: 0}
   <BaseRefTransform>k__BackingField: {fileID: 0}
   gravityMultiplier: 1
-  gravityMask: 1
+  <GravityMask>k__BackingField: 1
   <ExternalGravity>k__BackingField: {x: 0, y: -30, z: 0}
   inputState:
     <Look>k__BackingField: {x: 0, y: 0}

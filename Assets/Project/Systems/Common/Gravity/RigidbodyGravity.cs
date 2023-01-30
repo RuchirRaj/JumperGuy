@@ -11,7 +11,7 @@ namespace RR.Common
     {
         public bool floatToSleep = true;
         public float floatDelay = 2f;
-        public int mask;
+        public GravityManager.GravityMask mask = GravityManager.GravityMask.Channel0;
         
         [CustomTitle("Update", 1f, 0.62f, 0.91f)]
         public UpdateMethod fixedUpdate = new (){autoUpdate = true};

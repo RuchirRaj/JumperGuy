@@ -67,7 +67,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: <BobAmpMultiplier>k__BackingField
-    value: 1
+    value: 1.5
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: <BobRateMultiplier>k__BackingField
@@ -311,7 +311,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: <BobAmplitude>k__BackingField.y
-    value: 1
+    value: 0.5
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: <BobAmplitude>k__BackingField.z
@@ -319,7 +319,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: <BobAmplitude>k__BackingField.w
-    value: 0.5
+    value: 0.1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: <BobRate>k__BackingField.x
@@ -327,15 +327,27 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: <BobRate>k__BackingField.y
-    value: 0.75
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: <BobRate>k__BackingField.z
-    value: 0.5
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: <BobRate>k__BackingField.w
-    value: 0.25
+    value: 0.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: cameras.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: 'cameras.Array.data[0]'
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: 'cameras.Array.data[1]'
+    value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: lateUpdate.autoUpdate

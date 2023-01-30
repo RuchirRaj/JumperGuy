@@ -1,6 +1,4 @@
-﻿using System;
-using Drawing;
-using RR.Utils;
+﻿using Drawing;
 using UnityEngine;
 
 namespace RR.Common
@@ -12,15 +10,16 @@ namespace RR.Common
         public AnimationCurve gravity;
         public float gravityMultiplier = -10;
         public float radius = 10;
-        [Space]
-        public bool runtimeGizmo;
-        public bool editorGizmo = true;
+        public GravityManager.GravityMask mask = (GravityManager.GravityMask)1;
 
-
-        public override Vector3 GetGravity(Vector3 position, int mask)
+        public override Vector3 GetGravity(Vector3 position, GravityManager.GravityMask mask)
         {
             var direction = position - transform.position;
-            return WithinBounds(position) ? direction.normalized * (gravityMultiplier * gravity.Evaluate(direction.magnitude)): Vector3.zero;
+            return (this.mask & this.mask) != 0
+                ? WithinBounds(position)
+                    ? direction.normalized * (gravityMultiplier * gravity.Evaluate(direction.magnitude))
+                    : Vector3.zero
+                : Vector3.zero;
         }
 
         public override bool WithinBounds(Vector3 pos)
@@ -28,24 +27,9 @@ namespace RR.Common
             return (pos - transform.position).magnitude < radius;
         }
 
-        public override void DrawGizmos()
+        protected override void Draw(CommandBuilder draw)
         {
-            if (editorGizmo || GizmoContext.InSelection(this))
-            {
-                Draw(Drawing.Draw.editor);
-            }
-        }
-
-        private void Update()
-        {
-            if(runtimeGizmo)
-                Draw(Drawing.Draw.ingame);
-        }
-
-        private void Draw(CommandBuilder draw)
-        {
-            using (draw.WithColor(Color.yellow))
-                draw.WireSphere(transform.position, radius);
+            draw.WireSphere(transform.position, radius);
         }
     }
 }

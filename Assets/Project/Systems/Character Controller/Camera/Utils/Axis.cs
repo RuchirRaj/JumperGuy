@@ -35,10 +35,21 @@ namespace RR.Gameplay.CharacterController.Camera
             if (!wrap)
                 return Mathf.Clamp(value, clamp.x, clamp.y);
 
+            /*
             while (value < clamp.x) value = clamp.y + value - clamp.x;
 
             while (value > clamp.y) value = clamp.x + value - clamp.y;
+            */
+            
+            var x = value;
+            if (x < clamp.x || x > clamp.y)
+            {
+                x -= clamp.x;
+                x %= (clamp.y - clamp.x);
+                x += clamp.x;
+            }
 
+            value = x;
             return value;
         }
 
