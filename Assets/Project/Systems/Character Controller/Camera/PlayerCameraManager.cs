@@ -10,14 +10,13 @@ namespace RR.Gameplay.CharacterController.Camera
     [AddComponentMenu("Ruchir/Character/Camera/Camera Manager")]
     public class PlayerCameraManager : MonoBehaviour, IBatchLateUpdate
     {
-        
-        [field: SerializeField]
-        public Vector3 RestPosition { get; set; }
         [Header("Spring")]
         public SpringSettings positionSpring;
         public SpringSettings angularSpring;
-
-        [Space] 
+        
+        public float minCamHeight = 0.1f;
+        public float maxVelocity = 5;
+        [Header("Bob")] 
         public bool bob = true;
         [Range(0,10)] public float bobAmpMultiplier = 1;
         public AnimationCurve bobMultiplierOverSpeed = new()
@@ -42,7 +41,12 @@ namespace RR.Gameplay.CharacterController.Camera
         public float bobExtraSpeed = 2;
         public Vector4 bobAmplitude = Vector4.one;
         public Vector4 bobRate = Vector4.one;
-        [Space(10)]
+        [Header("Kneeling")] 
+        [Min(0)] public float maxImpactVelocity = 10f;
+        [Range(0, 50)] public float maxPositionKneelingImpulse = 1f;
+        [Range(0, 10)] public float maxRotationKneelingImpulse = 1f;
+        public Vector3 rotationKneelingImpulseDirection = Vector3.forward;
+        [Header("Cameras")]
         public List<PlayerCameraBase> cameras = new();
 
         [Space]
@@ -54,7 +58,7 @@ namespace RR.Gameplay.CharacterController.Camera
         private float _bobSpeed, _lastBobSpeed;
         private Vector4 _currentBobAmp, _currentBobVal;
         private Vector4 _currentBobTime;
-        private CameraSpring _bobSpring;
+        private CameraSpring _camSpring;
         private int _currentCam;
         
         //Const
@@ -63,15 +67,23 @@ namespace RR.Gameplay.CharacterController.Camera
         private void OnEnable()
         {
             _controller = GetComponentInParent<CharacterController>();
-            _bobSpring ??= new CameraSpring();
+            _camSpring ??= new CameraSpring();
             _controller.InputState.onCamEvent += OnCamEvent;
+            _controller.OnGroundImpact += ControllerOnGroundImpact;
             this.RegisterLateUpdate(lateUpdate);
             SetActiveCamera(_currentCam, true);
         }
-        
+
+        private void ControllerOnGroundImpact(Vector3 vel, Vector3 localVel)
+        {
+            if(localVel.y < 0)
+                OnImpact(localVel);
+        }
+
         private void OnDisable()
         {
             _controller.InputState.onCamEvent -= OnCamEvent;
+            _controller.OnGroundImpact -= ControllerOnGroundImpact;
             this.DeregisterLateUpdate();
         }
         
@@ -117,16 +129,20 @@ namespace RR.Gameplay.CharacterController.Camera
 
         private void UpdateSpring(float dt)
         {
-            _bobSpring.angularSpring = angularSpring;
-            _bobSpring.positionSpring = positionSpring;
+            _camSpring.angularSpring = angularSpring;
+            _camSpring.positionSpring = positionSpring;
 
-            var s = _bobSpring;
+            var s = _camSpring;
             s.targetRot = Quaternion.identity;
             s.targetPos = new Vector3(0,
                 _controller.CurrentShapeState.shape.value.height - _controller.CurrentShapeState.shape.value.radius, 0);
             s.Update(dt, transform.localRotation, transform.localPosition);
-            
-            transform.SetLocalPositionAndRotation(s.pos, s.rot);
+
+            transform.SetLocalPositionAndRotation(
+                MathUtils.ClampValue(
+                    new(0, minCamHeight, 0), 
+                    new(0, Mathf.Infinity /*_controller.CurrentShapeState.shape.value.height*/, 0), s.pos),
+                s.rot);
         }
 
         void UpdateBob(float dt, Vector3 vel)
@@ -142,9 +158,9 @@ namespace RR.Gameplay.CharacterController.Camera
             if (_bobSpeed == 0)
                 _bobSpeed = Mathf.Min(_lastBobSpeed * (1 - (bobChangeSpeed * dt)), 0);
 
-            var b = bobMultiplierOverSpeed.Evaluate(_bobSpeed);
+            var b = bobMultiplierOverSpeed.Evaluate(_bobSpeed / maxVelocity);
             
-            _currentBobTime += bobRate * (bobRateOverSpeed.Evaluate(_bobSpeed) * bobRateMultiplier * dt);
+            _currentBobTime += bobRate * (bobRateOverSpeed.Evaluate(_bobSpeed / maxVelocity) * bobRateMultiplier * dt);
 
             _currentBobTime = MathUtils.WrapValue(-TimeClamp, TimeClamp, _currentBobTime);
 
@@ -160,10 +176,29 @@ namespace RR.Gameplay.CharacterController.Camera
             _currentBobAmp.w = (b * (bobAmplitude.w));
             _currentBobVal.w = (Mathf.Cos(_currentBobTime.w * 2 * Mathf.PI)) * _currentBobAmp.w * 10;
 
-            _bobSpring.AddForce(_currentBobVal * bobAmpMultiplier,
+            _camSpring.AddForce(_currentBobVal * bobAmpMultiplier,
                 ForceMode.Force, dt);
-            _bobSpring.AddTorque(Vector3.forward * (_currentBobVal.w * bobAmpMultiplier),
+            _camSpring.AddTorque(Vector3.forward * (_currentBobVal.w * bobAmpMultiplier),
                 ForceMode.Force, dt);
+        }
+
+        /// <summary>
+        /// Add Impact kneeling
+        /// </summary>
+        /// <param name="impact">Impact in local co-ordinates</param>
+        public void OnImpact(Vector3 impact)
+        {
+            float posImpact = Mathf.Abs(impact.y / maxImpactVelocity);
+            float rotImpact = Mathf.Abs(impact.y / maxImpactVelocity);
+
+            // smooth step the impacts to make the springs react more subtly
+            // from short falls, and more aggressively from longer falls
+            posImpact = Mathf.SmoothStep(0, 1, posImpact);
+            rotImpact = Mathf.SmoothStep(0, 1, rotImpact);
+            rotImpact = Mathf.SmoothStep(0, 1, rotImpact);
+
+            _camSpring.AddImpulse(Vector3.down * (maxPositionKneelingImpulse * posImpact));
+            _camSpring.AddImpulseTorque(rotationKneelingImpulseDirection * (maxRotationKneelingImpulse * rotImpact));
         }
     }
 }

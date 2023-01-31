@@ -1,4 +1,5 @@
-﻿using RR.Attributes;
+﻿using System;
+using RR.Attributes;
 using RR.Utils;
 using UnityEngine;
 
@@ -18,6 +19,13 @@ namespace RR.Gameplay.CharacterController
 
         #endregion
 
+        #region Events
+
+        public event Action OnGrounded; 
+        public event Action<Vector3, Vector3> OnGroundImpact; 
+
+        #endregion
+        
         [CustomTitle("Settings", 1f, 0.73f, 0.6f)]
         [SerializeField] public LookDirection lookDirection = LookDirection.InputWhenMovementDetected;
         [SerializeField] public bool stopRotatingByDefault;
@@ -143,9 +151,21 @@ namespace RR.Gameplay.CharacterController
 
         void DetectGround(float dt)
         {
+            var g = IsGrounded;
             Base.S1_UpdateSettings(false);
             Base.S1_UpdateCache();
             Base.S1_GroundSensorDetect();
+            if (IsGrounded && !g)
+            {
+                OnGrounded?.Invoke();
+                var relativeVel = Rigidbody.velocity;
+                if (Base.Sensor.averageHit.col.attachedRigidbody)
+                {
+                    relativeVel -=
+                        Base.Sensor.averageHit.col.attachedRigidbody.GetPointVelocity(Base.Sensor.averageHit.point);
+                }
+                OnGroundImpact?.Invoke(relativeVel, RefTransform.InverseTransformDirection(relativeVel));
+            }
         }
         
         private void DetectInputDirection()

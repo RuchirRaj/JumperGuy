@@ -16,8 +16,11 @@ namespace RR.Gameplay.CharacterController.Weapon
         [Header("Spring")] 
         public SpringSettings positionSpring;
         public SpringSettings angularSpring;
-
-        [Space]
+        [Space] 
+        public Vector3 pivotOffset = Vector3.zero;
+        public float maxVelocity = 5;
+        
+        [Header("Bob")]
         public bool bob = true;
         [Range(0, 10)] public float bobAmpMultiplier = 1;
         public AnimationCurve bobMultiplierOverSpeed = new()
@@ -61,8 +64,27 @@ namespace RR.Gameplay.CharacterController.Weapon
         [Range(0, 10)]public float positionFallRetract = 1;
         public Vector3 positionWalkSlide = Vector3.one;
 
-        [Space] 
-        public Vector3 pivotOffset = Vector3.zero;
+        [Header("Step")] 
+        public bool step = true;
+        [Min(0)] public float stepVelocityThreshold;
+        public Vector3 stepPositionForce = Vector3.down;
+        public Vector3 stepRotationTorque = Vector3.right;
+        [Range(0, 10)] public float stepForceMultiplier;
+        public AnimationCurve stepForceOverSpeed = new()
+        {
+            keys = new[]
+            {
+                new Keyframe(0, 0), new Keyframe(1, 1)
+            }
+        };
+        [Range(-1, 1)] public float stepPositionBalance;
+        [Range(-1, 1)] public float stepRotationBalance;
+
+        [Header("Kneeling")] 
+        [Min(0)] public float maxImpactVelocity = 10f;
+        [Range(0, 50)] public float maxPositionKneelingImpulse = 1f;
+        [Range(0, 10)] public float maxRotationKneelingImpulse = 1f;
+        public Vector3 rotationKneelingImpulseDirection = Vector3.forward;
 
         [Space]
         [CustomTitle("Update", 1f, 0.79f, 0.98f)]
@@ -73,7 +95,10 @@ namespace RR.Gameplay.CharacterController.Weapon
         private float _bobSpeed, _lastBobSpeed;
         private Vector4 _currentBobAmp, _currentBobVal;
         private Vector4 _currentBobTime;
-        private CameraSpring _bobSpring;
+        private float _lastUpBob;
+        private bool _bobWasElevating;
+        private int _bobCount;
+        private CameraSpring _weaponSpring;
 
         //Const
         private static readonly Vector4 TimeClamp = new Vector4(1, 1, 1, 1) * 100;
@@ -81,13 +106,21 @@ namespace RR.Gameplay.CharacterController.Weapon
         private void OnEnable()
         {
             _controller = GetComponentInParent<CharacterController>();
-            _bobSpring ??= new CameraSpring();
+            _weaponSpring ??= new CameraSpring();
             this.RegisterLateUpdate(lateUpdate);
+            _controller.OnGroundImpact += ControllerOnGroundImpact;
+        }
+
+        private void ControllerOnGroundImpact(Vector3 vel, Vector3 localVel)
+        {
+            if(localVel.y < 0)
+                OnImpact(localVel);
         }
 
         private void OnDisable()
         {
             this.DeregisterLateUpdate();
+            _controller.OnGroundImpact -= ControllerOnGroundImpact;
         }
 
         public void BatchLateUpdate(float dt, float sdt)
@@ -101,7 +134,49 @@ namespace RR.Gameplay.CharacterController.Weapon
                   _controller.GroundVel
                 : Vector3.zero;
             UpdateBob(dt, relativeVel);
+            UpdateStep(dt, relativeVel, grounded);
             UpdateSpring(dt);
+        }
+
+        /// <summary>
+        /// applies force to the weapon springs to simulate a fine
+        /// footstep impact in sync with the weapon bob. a footstep
+        /// is triggered when the vertical weapon bob reaches its
+        /// bottom value, provided that the controller's squared
+        /// velocity is higher than 'FootStepMinVelocity' (which
+        /// must be above zero)
+        /// </summary>
+        private void UpdateStep(float dt, Vector3 relativeVel, bool grounded)
+        {
+            if(!grounded || relativeVel.magnitude < stepVelocityThreshold)
+                return;
+            bool elevating = (_lastUpBob < _currentBobVal.x);
+            _lastUpBob = _currentBobVal.x;
+            var posImp = Vector3.zero;
+            var rotImp = Vector3.zero;
+
+            if (elevating && !_bobWasElevating)
+            {
+                _bobCount++;
+                if (_bobCount % 2 == 0)
+                {
+                    posImp = stepPositionForce - (stepPositionForce * stepPositionBalance);
+                    rotImp = stepRotationTorque - (stepPositionForce * stepRotationBalance);
+                }
+                else
+                {
+                    posImp = stepPositionForce + (stepPositionForce * stepPositionBalance);
+                    rotImp = Vector3.Scale(stepRotationTorque - (stepPositionForce * stepRotationBalance),
+                        -Vector3.one + (Vector3.right * 2));	// invert y & z rotation
+                }
+            }
+
+            var mul = stepForceMultiplier *
+                      stepForceOverSpeed.Evaluate(relativeVel.magnitude / maxVelocity);
+            _weaponSpring.AddImpulse(posImp * mul);
+            _weaponSpring.AddImpulseTorque(rotImp * mul);
+            
+            _bobWasElevating = elevating;
         }
 
         private void UpdateBob(float dt, Vector3 vel)
@@ -117,9 +192,9 @@ namespace RR.Gameplay.CharacterController.Weapon
             if (_bobSpeed == 0)
                 _bobSpeed = Mathf.Min(_lastBobSpeed * (1 - bobChangeSpeed * dt), 0);
 
-            var b = bobMultiplierOverSpeed.Evaluate(_bobSpeed);
+            var b = bobMultiplierOverSpeed.Evaluate(_bobSpeed / maxVelocity);
 
-            _currentBobTime += bobRate * (bobRateOverSpeed.Evaluate(_bobSpeed) * bobRateMultiplier * dt);
+            _currentBobTime += bobRate * (bobRateOverSpeed.Evaluate(_bobSpeed / maxVelocity) * bobRateMultiplier * dt);
 
             _currentBobTime = MathUtils.WrapValue(-TimeClamp, TimeClamp, _currentBobTime);
 
@@ -135,9 +210,9 @@ namespace RR.Gameplay.CharacterController.Weapon
             _currentBobAmp.w = b * bobAmplitude.w;
             _currentBobVal.w = Mathf.Cos(_currentBobTime.w * 2 * Mathf.PI) * _currentBobAmp.w * 10;
 
-            _bobSpring.AddForce(_currentBobVal * bobAmpMultiplier,
+            _weaponSpring.AddForce(_currentBobVal * bobAmpMultiplier,
                 ForceMode.Force, dt);
-            _bobSpring.AddTorque(Vector3.forward * (_currentBobVal.w * bobAmpMultiplier),
+            _weaponSpring.AddTorque(Vector3.forward * (_currentBobVal.w * bobAmpMultiplier),
                 ForceMode.Force, dt);
         }
 
@@ -179,7 +254,7 @@ namespace RR.Gameplay.CharacterController.Weapon
 
             torque *= swayMultiplier;
 
-            _bobSpring.AddTorque(torque, ForceMode.Force, dt);
+            _weaponSpring.AddTorque(torque, ForceMode.Force, dt);
 
             var force = Vector3.zero;
 
@@ -195,12 +270,12 @@ namespace RR.Gameplay.CharacterController.Weapon
                 -Mathf.Abs(localVelocity.magnitude * positionWalkSlide.y),
                 -localVelocity.z * positionWalkSlide.z);
 
-            _bobSpring.AddForce(force, ForceMode.Force, dt);
+            _weaponSpring.AddForce(force, ForceMode.Force, dt);
         }
 
         private void UpdateSpring(float dt)
         {
-            var s = _bobSpring;
+            var s = _weaponSpring;
             s.angularSpring = angularSpring;
             s.positionSpring = positionSpring;
             s.pivotPos = pivotOffset;
@@ -210,6 +285,25 @@ namespace RR.Gameplay.CharacterController.Weapon
             s.Update(dt, transform.localRotation, transform.localPosition);
 
             transform.SetLocalPositionAndRotation(s.pos, s.rot);
+        }
+        
+        /// <summary>
+        /// Add Impact kneeling
+        /// </summary>
+        /// <param name="impact">Impact in local co-ordinates</param>
+        public void OnImpact(Vector3 impact)
+        {
+            float posImpact = Mathf.Abs(impact.y / maxImpactVelocity);
+            float rotImpact = Mathf.Abs(impact.y / maxImpactVelocity);
+
+            // smooth step the impacts to make the springs react more subtly
+            // from short falls, and more aggressively from longer falls
+            posImpact = Mathf.SmoothStep(0, 1, posImpact);
+            rotImpact = Mathf.SmoothStep(0, 1, rotImpact);
+            rotImpact = Mathf.SmoothStep(0, 1, rotImpact);
+
+            _weaponSpring.AddImpulse(Vector3.down * (maxPositionKneelingImpulse * posImpact));
+            _weaponSpring.AddImpulseTorque(rotationKneelingImpulseDirection * (maxRotationKneelingImpulse * rotImpact));
         }
 
         private void OnDrawGizmos()

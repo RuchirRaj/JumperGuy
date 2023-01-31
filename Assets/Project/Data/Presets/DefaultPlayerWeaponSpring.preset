@@ -59,7 +59,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: positionSpring.frequency
-    value: 5
+    value: 6
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: positionSpring.damper
@@ -78,12 +78,28 @@ Preset:
     value: 0.5
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: pivotOffset.x
+    value: 0.15
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: pivotOffset.y
+    value: -0.32
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: pivotOffset.z
+    value: 0.22
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: maxVelocity
+    value: 6
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: bob
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobAmpMultiplier
-    value: 1.5
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobMultiplierOverSpeed.m_Curve.Array.size
@@ -99,11 +115,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[0].inSlope
-    value: 0.35921624
+    value: 0.375
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[0].outSlope
-    value: 0.35921624
+    value: 0.375
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[0].tangentMode
@@ -119,11 +135,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[0].outWeight
-    value: 0.054166667
+    value: 0.041666668
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[1].time
-    value: 8
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[1].value
@@ -131,11 +147,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[1].inSlope
-    value: 0
+    value: 0.0024826275
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[1].outSlope
-    value: 0
+    value: 0.0024826275
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[1].tangentMode
@@ -147,7 +163,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[1].inWeight
-    value: 0
+    value: 0.23750001
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[1].outWeight
@@ -167,11 +183,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRateMultiplier
-    value: 1
+    value: 2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRateOverSpeed.m_Curve.Array.size
-    value: 2
+    value: 3
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRateOverSpeed.m_Curve.Array.data[0].time
@@ -183,11 +199,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRateOverSpeed.m_Curve.Array.data[0].inSlope
-    value: 0.35921624
+    value: 0.375
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRateOverSpeed.m_Curve.Array.data[0].outSlope
-    value: 0.35921624
+    value: 0.375
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRateOverSpeed.m_Curve.Array.data[0].tangentMode
@@ -203,23 +219,23 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRateOverSpeed.m_Curve.Array.data[0].outWeight
-    value: 0.054166667
+    value: 0.041666668
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRateOverSpeed.m_Curve.Array.data[1].time
-    value: 8
+    value: 0.5
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRateOverSpeed.m_Curve.Array.data[1].value
-    value: 1
+    value: 0.8
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRateOverSpeed.m_Curve.Array.data[1].inSlope
-    value: 0
+    value: 1.4122319
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRateOverSpeed.m_Curve.Array.data[1].outSlope
-    value: 0
+    value: 1.4122319
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRateOverSpeed.m_Curve.Array.data[1].tangentMode
@@ -231,10 +247,42 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRateOverSpeed.m_Curve.Array.data[1].inWeight
-    value: 0
+    value: 0.33333334
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRateOverSpeed.m_Curve.Array.data[1].outWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: bobRateOverSpeed.m_Curve.Array.data[2].time
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: bobRateOverSpeed.m_Curve.Array.data[2].value
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: bobRateOverSpeed.m_Curve.Array.data[2].inSlope
+    value: 0.0024826275
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: bobRateOverSpeed.m_Curve.Array.data[2].outSlope
+    value: 0.0024826275
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: bobRateOverSpeed.m_Curve.Array.data[2].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: bobRateOverSpeed.m_Curve.Array.data[2].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: bobRateOverSpeed.m_Curve.Array.data[2].inWeight
+    value: 0.23750001
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: bobRateOverSpeed.m_Curve.Array.data[2].outWeight
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
@@ -259,7 +307,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobAmplitude.x
-    value: 0.5
+    value: 0.1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobAmplitude.y
@@ -267,7 +315,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobAmplitude.z
-    value: 0.2
+    value: 0.75
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobAmplitude.w
@@ -275,19 +323,19 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRate.x
-    value: 2
+    value: 1.4
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRate.y
-    value: 1
+    value: 0.7
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRate.z
-    value: 1
+    value: 0.7
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRate.w
-    value: 1
+    value: 0.7
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: sway
@@ -295,7 +343,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: swayMultiplier
-    value: 3
+    value: 6
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: swayLookMultiplier.x
@@ -307,27 +355,27 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: rotationLookSway.x
-    value: 1
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: rotationLookSway.y
-    value: 1
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: rotationLookSway.z
     value: 2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: rotationLookSway.y
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rotationLookSway.z
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: rotationStrafeSway.x
-    value: 1
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: rotationStrafeSway.y
-    value: 1
+    value: 1.5
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: rotationStrafeSway.z
-    value: 1
+    value: -2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: rotationFallSway.x
@@ -335,7 +383,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: rotationFallSway.y
-    value: -0.5
+    value: -0.2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: rotationFallSway.z
@@ -343,7 +391,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: rotationSlopeSway
-    value: 2
+    value: 3
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: positionFallRetract
@@ -351,27 +399,163 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: positionWalkSlide.x
-    value: 2
+    value: 2.5
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: positionWalkSlide.y
-    value: 1
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: positionWalkSlide.z
     value: 2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: pivotOffset.x
-    value: 0.15
+    propertyPath: step
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: pivotOffset.y
-    value: -0.32
+    propertyPath: stepVelocityThreshold
+    value: 2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: pivotOffset.z
-    value: 0.22
+    propertyPath: stepPositionForce.x
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepPositionForce.y
+    value: -0.1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepPositionForce.z
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepRotationTorque.x
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepRotationTorque.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepRotationTorque.z
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepForceMultiplier
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepForceOverSpeed.m_Curve.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepForceOverSpeed.m_Curve.Array.data[0].time
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepForceOverSpeed.m_Curve.Array.data[0].value
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepForceOverSpeed.m_Curve.Array.data[0].inSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepForceOverSpeed.m_Curve.Array.data[0].outSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepForceOverSpeed.m_Curve.Array.data[0].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepForceOverSpeed.m_Curve.Array.data[0].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepForceOverSpeed.m_Curve.Array.data[0].inWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepForceOverSpeed.m_Curve.Array.data[0].outWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepForceOverSpeed.m_Curve.Array.data[1].time
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepForceOverSpeed.m_Curve.Array.data[1].value
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepForceOverSpeed.m_Curve.Array.data[1].inSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepForceOverSpeed.m_Curve.Array.data[1].outSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepForceOverSpeed.m_Curve.Array.data[1].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepForceOverSpeed.m_Curve.Array.data[1].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepForceOverSpeed.m_Curve.Array.data[1].inWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepForceOverSpeed.m_Curve.Array.data[1].outWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepForceOverSpeed.m_PreInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepForceOverSpeed.m_PostInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepForceOverSpeed.m_RotationOrder
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepPositionBalance
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepRotationBalance
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: maxImpactVelocity
+    value: 6
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: maxPositionKneelingImpulse
+    value: 20
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: maxRotationKneelingImpulse
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rotationKneelingImpulseDirection.x
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rotationKneelingImpulseDirection.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rotationKneelingImpulseDirection.z
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: lateUpdate.autoUpdate

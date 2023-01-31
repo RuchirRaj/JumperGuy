@@ -39,6 +39,35 @@ namespace RR.Utils
                 WrapValue(min.z, max.z, value.z),
                 WrapValue(min.w, max.w, value.w));
         }
+
+        public static float ClampValue(float min, float max, float value)
+        {
+            return Mathf.Clamp(value, min, max);
+        }
+        public static Vector2 ClampValue(Vector2 min, Vector2 max, Vector2 value)
+        {
+            return new(
+                Mathf.Clamp(value.x, min.x, max.x),
+                Mathf.Clamp(value.y, min.y, max.y)
+            );
+        }
+        public static Vector3 ClampValue(Vector3 min, Vector3 max, Vector3 value)
+        {
+            return new(
+                Mathf.Clamp(value.x, min.x, max.x),
+                Mathf.Clamp(value.y, min.y, max.y),
+                Mathf.Clamp(value.z, min.z, max.z)
+            );
+        }
+        public static Vector4 ClampValue(Vector4 min, Vector4 max, Vector4 value)
+        {
+            return new(
+                Mathf.Clamp(value.x, min.x, max.x),
+                Mathf.Clamp(value.y, min.y, max.y),
+                Mathf.Clamp(value.z, min.z, max.z),
+                Mathf.Clamp(value.w, min.w, max.w)
+            );
+        }
         
         /// <summary>
         /// Rotate the vector to be tangential to normal along the (normal, Up) plane

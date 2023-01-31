@@ -6,7 +6,7 @@ Preset:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DefaultPlayerCameraController
+  m_Name: DefaultPlayerCameraManager
   m_TargetType:
     m_NativeTypeID: 114
     m_ManagedTypePPtr: {fileID: 11500000, guid: db319e1b0315491fae7fc804617763d7,
@@ -26,24 +26,12 @@ Preset:
     value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: <RestPosition>k__BackingField.x
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <RestPosition>k__BackingField.y
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: <RestPosition>k__BackingField.z
-    value: 0
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
     propertyPath: positionSpring.useForce
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: positionSpring.frequency
-    value: 6
+    value: 5
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: positionSpring.damper
@@ -62,12 +50,20 @@ Preset:
     value: 0.75
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: minCamHeight
+    value: 0.2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: maxVelocity
+    value: 6
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: bob
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobAmpMultiplier
-    value: 2
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobMultiplierOverSpeed.m_Curve.Array.size
@@ -83,11 +79,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[0].inSlope
-    value: 0.33962265
+    value: 0.375
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[0].outSlope
-    value: 0.33962265
+    value: 0.375
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[0].tangentMode
@@ -103,11 +99,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[0].outWeight
-    value: 0.0625
+    value: 0.041666668
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[1].time
-    value: 8
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[1].value
@@ -115,11 +111,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[1].inSlope
-    value: 0
+    value: 0.0024826275
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[1].outSlope
-    value: 0
+    value: 0.0024826275
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[1].tangentMode
@@ -131,7 +127,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[1].inWeight
-    value: 0
+    value: 0.23750001
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobMultiplierOverSpeed.m_Curve.Array.data[1].outWeight
@@ -167,11 +163,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRateOverSpeed.m_Curve.Array.data[0].inSlope
-    value: 0.33962265
+    value: 0.375
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRateOverSpeed.m_Curve.Array.data[0].outSlope
-    value: 0.33962265
+    value: 0.375
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRateOverSpeed.m_Curve.Array.data[0].tangentMode
@@ -187,11 +183,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRateOverSpeed.m_Curve.Array.data[0].outWeight
-    value: 0.0625
+    value: 0.041666668
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRateOverSpeed.m_Curve.Array.data[1].time
-    value: 8
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRateOverSpeed.m_Curve.Array.data[1].value
@@ -199,11 +195,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRateOverSpeed.m_Curve.Array.data[1].inSlope
-    value: 0
+    value: 0.0024826275
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRateOverSpeed.m_Curve.Array.data[1].outSlope
-    value: 0
+    value: 0.0024826275
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRateOverSpeed.m_Curve.Array.data[1].tangentMode
@@ -215,7 +211,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRateOverSpeed.m_Curve.Array.data[1].inWeight
-    value: 0
+    value: 0.23750001
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRateOverSpeed.m_Curve.Array.data[1].outWeight
@@ -243,15 +239,15 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobAmplitude.x
-    value: 1
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobAmplitude.y
-    value: 0.5
+    value: 2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobAmplitude.z
-    value: 0.1
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobAmplitude.w
@@ -259,19 +255,43 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRate.x
-    value: 0.5
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRate.y
-    value: 1
+    value: 1.4
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRate.z
-    value: 1
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobRate.w
-    value: 0.5
+    value: 0.7
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: maxImpactVelocity
+    value: 8
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: maxPositionKneelingImpulse
+    value: 35
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: maxRotationKneelingImpulse
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rotationKneelingImpulseDirection.x
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rotationKneelingImpulseDirection.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rotationKneelingImpulseDirection.z
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: cameras.Array.size

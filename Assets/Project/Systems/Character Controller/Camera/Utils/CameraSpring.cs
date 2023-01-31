@@ -69,6 +69,16 @@ namespace RR.Gameplay.CharacterController.Camera
                     break;
             }
         }
+        
+        public void AddImpulse(Vector3 value)
+        {
+            velocity += value;
+        }
+        
+        public void AddImpulseTorque(Vector3 value)
+        {
+            angularVelocity += value;
+        }
 
         public void AddTorque(Vector3 value, ForceMode mode, float dt)
         {
