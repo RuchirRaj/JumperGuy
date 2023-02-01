@@ -2922,7 +2922,7 @@ MonoBehaviour:
   positionWalkSlide: {x: 2.5, y: 0, z: 2}
   step: 1
   stepVelocityThreshold: 2
-  stepPositionForce: {x: 0, y: -0.1, z: 0}
+  stepPositionForce: {x: 0, y: -0.5, z: 0}
   stepRotationTorque: {x: 1, y: 0, z: 0}
   stepForceMultiplier: 1
   stepForceOverSpeed:
@@ -3055,7 +3055,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 525255651}
-  m_LocalRotation: {x: -0.096078426, y: 0.86695033, z: -0.1837958, w: -0.45319438}
+  m_LocalRotation: {x: -0.096078426, y: 0.8669504, z: -0.18379581, w: -0.45319438}
   m_LocalPosition: {x: 3.4931605, y: 4.7199993, z: 25.030275}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -12672,7 +12672,7 @@ MonoBehaviour:
     useForce: 0
     frequency: 4
     damper: 0.75
-  minCamHeight: 0.2
+  minCamHeight: 0.25
   maxVelocity: 6
   bob: 1
   bobAmpMultiplier: 1
@@ -12731,8 +12731,16 @@ MonoBehaviour:
   bobRate: {x: 0, y: 1.4, z: 0, w: 0.7}
   maxImpactVelocity: 8
   maxPositionKneelingImpulse: 35
+  positionKneelingSoftForce:
+    force: {x: 0, y: -300, z: 0}
+    time: 0.5
+    currentTime: 0
   maxRotationKneelingImpulse: 5
-  rotationKneelingImpulseDirection: {x: 0, y: 0, z: 1}
+  rotationKneelingSoftForce:
+    force: {x: 0, y: 0, z: 50}
+    time: 0.5
+    currentTime: 0
+  rotationKneelingImpulseDirection: {x: 1.5, y: 0, z: 1}
   cameras:
   - {fileID: 1438878011}
   - {fileID: 525255656}

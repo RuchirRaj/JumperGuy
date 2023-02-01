@@ -44,7 +44,9 @@ namespace RR.Gameplay.CharacterController.Camera
         [Header("Kneeling")] 
         [Min(0)] public float maxImpactVelocity = 10f;
         [Range(0, 50)] public float maxPositionKneelingImpulse = 1f;
+        public CameraSpring.SoftForce positionKneelingSoftForce;
         [Range(0, 10)] public float maxRotationKneelingImpulse = 1f;
+        public CameraSpring.SoftForce rotationKneelingSoftForce;
         public Vector3 rotationKneelingImpulseDirection = Vector3.forward;
         [Header("Cameras")]
         public List<PlayerCameraBase> cameras = new();
@@ -199,6 +201,11 @@ namespace RR.Gameplay.CharacterController.Camera
 
             _camSpring.AddImpulse(Vector3.down * (maxPositionKneelingImpulse * posImpact));
             _camSpring.AddImpulseTorque(rotationKneelingImpulseDirection * (maxRotationKneelingImpulse * rotImpact));
+
+            _camSpring.AddSoftPositionForce(new CameraSpring.SoftForce(posImpact * positionKneelingSoftForce.time,
+                posImpact * positionKneelingSoftForce.force));
+            _camSpring.AddSoftRotationForce(new CameraSpring.SoftForce(rotImpact * rotationKneelingSoftForce.time,
+                rotImpact * rotationKneelingSoftForce.force));
         }
     }
 }

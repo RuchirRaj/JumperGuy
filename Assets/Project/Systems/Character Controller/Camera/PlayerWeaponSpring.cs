@@ -278,7 +278,7 @@ namespace RR.Gameplay.CharacterController.Weapon
             var s = _weaponSpring;
             s.angularSpring = angularSpring;
             s.positionSpring = positionSpring;
-            s.pivotPos = pivotOffset;
+            s.pivotOffset = pivotOffset;
             s.targetPos = restPosition + pivotOffset;
 
             s.targetRot = restRotation;
