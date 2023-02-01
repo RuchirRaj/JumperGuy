@@ -2955,6 +2955,12 @@ MonoBehaviour:
   maxPositionKneelingImpulse: 20
   maxRotationKneelingImpulse: 2
   rotationKneelingImpulseDirection: {x: 0, y: 0, z: 1}
+  shakeSpeed: 2
+  shakeFrequency: 0.25
+  shakeAmplitude: {x: 2.5, y: 2.5, z: 5}
+  shakeMultiplier: 1
+  shakeNoiseType: 3
+  shakeNoiseFractalType: 0
   lateUpdate:
     autoUpdate: 1
     slicedUpdate: 0

@@ -86,6 +86,14 @@ namespace RR.Gameplay.CharacterController.Weapon
         [Range(0, 10)] public float maxRotationKneelingImpulse = 1f;
         public Vector3 rotationKneelingImpulseDirection = Vector3.forward;
 
+        [Header("Shake")] 
+        [Range(0, 10)] public float shakeSpeed = 2;
+        [Range(0, 10)] public float shakeFrequency = 0.25f;
+        public Vector3 shakeAmplitude = Vector3.zero;
+        [Range(0,50)] public float shakeMultiplier = 1;
+        public FastNoiseLite.NoiseType shakeNoiseType = FastNoiseLite.NoiseType.Perlin;
+        public FastNoiseLite.FractalType shakeNoiseFractalType = FastNoiseLite.FractalType.FBm;
+
         [Space]
         [CustomTitle("Update", 1f, 0.79f, 0.98f)]
         public UpdateMethod lateUpdate = new() { autoUpdate = true };
@@ -98,6 +106,9 @@ namespace RR.Gameplay.CharacterController.Weapon
         private float _lastUpBob;
         private bool _bobWasElevating;
         private int _bobCount;
+        private Vector3 _shake;
+        private float _shakeTime;
+        private FastNoiseLite _shakeNoise;
         private CameraSpring _weaponSpring;
 
         //Const
@@ -107,6 +118,7 @@ namespace RR.Gameplay.CharacterController.Weapon
         {
             _controller = GetComponentInParent<CharacterController>();
             _weaponSpring ??= new CameraSpring();
+            _shakeNoise ??= new FastNoiseLite();
             this.RegisterLateUpdate(lateUpdate);
             _controller.OnGroundImpact += ControllerOnGroundImpact;
         }
@@ -135,7 +147,32 @@ namespace RR.Gameplay.CharacterController.Weapon
                 : Vector3.zero;
             UpdateBob(dt, relativeVel);
             UpdateStep(dt, relativeVel, grounded);
+            UpdateShake(dt);
             UpdateSpring(dt);
+        }
+
+        /// <summary>
+        /// updates the procedural shaking of the weapon.
+        /// this is a purely aesthetic motion to breathe life into the first
+        /// person arm / weapon. if one wanted to expand on this, one could
+        /// alternate between higher and lower speeds and amplitudes.
+        /// </summary>
+        protected void UpdateShake(float dt)
+        {
+            // apply weapon shake
+            if (shakeSpeed != 0.0f)
+            {
+                _shakeNoise.SetNoiseType(shakeNoiseType);
+                _shakeNoise.SetFractalType(shakeNoiseFractalType);
+                _shakeNoise.SetFrequency(shakeFrequency);
+                
+                _shakeTime += shakeSpeed * dt;
+                _shake = Vector3.Scale(
+                    MathUtils.Noise.Random(_shakeNoise, _shakeTime)
+                    // .Remap(Vector3.zero, Vector3.one, -Vector3.one, Vector3.one)
+                    , shakeAmplitude) * (shakeMultiplier * 10);
+                _weaponSpring.AddTorque(_shake, ForceMode.Force, dt);
+            }
         }
 
         /// <summary>

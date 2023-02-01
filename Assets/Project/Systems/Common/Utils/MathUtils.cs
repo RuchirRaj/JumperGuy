@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace RR.Utils
@@ -103,6 +104,17 @@ namespace RR.Utils
             transform.rotation = deltaRot * transform.rotation;
         }
 
+        public static class Noise
+        {
+            public static Vector3 Random(FastNoiseLite noise, float time)
+            {
+                return new(
+                    noise.GetNoise(time, 0, 0),
+                    noise.GetNoise(0, time, 0),
+                    noise.GetNoise(0, 0, time)
+                    );
+            }
+        }
 
 
         public static class QuaternionUtils
