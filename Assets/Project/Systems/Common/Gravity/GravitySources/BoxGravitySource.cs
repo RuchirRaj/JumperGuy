@@ -1,4 +1,5 @@
-﻿using Drawing;
+﻿using System;
+using Drawing;
 using UnityEngine;
 
 namespace RR.Common
@@ -31,6 +32,33 @@ namespace RR.Common
             {
                 draw.WireBox(Vector3.zero, scale);
             }
+        }
+
+        private void OnDrawGizmos()
+        {
+            if (!editorGizmo) return;
+            
+            DrawGizmo();
+        }
+        
+        private void OnDrawGizmosSelected()
+        {
+            if (editorGizmo) return;
+            DrawGizmo();
+        }
+
+        private void DrawGizmo()
+        {
+            var c = gizmoColor;
+            c.a *= 0.1f;
+            Gizmos.color = c;
+            
+            var s = transform.lossyScale;
+            s.Scale(scale);
+            Matrix4x4 trs = Matrix4x4.TRS(transform.position, transform.rotation, s);
+            Gizmos.matrix = trs;
+            
+            Gizmos.DrawCube(Vector3.zero, Vector3.one);
         }
     }
 }

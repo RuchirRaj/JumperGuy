@@ -62,6 +62,7 @@ namespace RR.Gameplay.CharacterController.Camera
         private Vector4 _currentBobTime;
         private CameraSpring _camSpring;
         private int _currentCam;
+        private float _currentLowestPos;
         
         //Const
         private static readonly Vector4 TimeClamp = new Vector4(1,1,1,1) * 100;
@@ -72,6 +73,7 @@ namespace RR.Gameplay.CharacterController.Camera
             _camSpring ??= new CameraSpring();
             _controller.InputState.onCamEvent += OnCamEvent;
             _controller.OnGroundImpact += ControllerOnGroundImpact;
+            _currentLowestPos = Mathf.Infinity;
             this.RegisterLateUpdate(lateUpdate);
             SetActiveCamera(_currentCam, true);
         }
@@ -127,6 +129,11 @@ namespace RR.Gameplay.CharacterController.Camera
                 _controller.GroundVel : Vector3.zero;
             UpdateBob(dt, relativeVel);
             UpdateSpring(dt);
+            if (transform.localPosition.y < _currentLowestPos)
+            {
+                _currentLowestPos = transform.localPosition.y;
+                Debug.Log(_currentLowestPos);
+            }
         }
 
         private void UpdateSpring(float dt)
@@ -142,7 +149,7 @@ namespace RR.Gameplay.CharacterController.Camera
 
             transform.SetLocalPositionAndRotation(
                 MathUtils.ClampValue(
-                    new(0, minCamHeight, 0), 
+                    new(0, minCamHeight - _controller.Base.Sensor.averageHit.distance, 0), 
                     new(0, Mathf.Infinity /*_controller.CurrentShapeState.shape.value.height*/, 0), s.pos),
                 s.rot);
         }

@@ -157,7 +157,7 @@ namespace RR.Gameplay.CharacterController.Weapon
         /// person arm / weapon. if one wanted to expand on this, one could
         /// alternate between higher and lower speeds and amplitudes.
         /// </summary>
-        protected void UpdateShake(float dt)
+        private void UpdateShake(float dt)
         {
             // apply weapon shake
             if (shakeSpeed != 0.0f)

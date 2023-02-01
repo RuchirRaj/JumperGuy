@@ -31,6 +31,7 @@ namespace RR.Gameplay.CharacterController
         [SerializeField] public bool stopRotatingByDefault;
         [SerializeField] public float rotationSpeed = 10;
         [SerializeField] public float maxAngularVelocity = 2;
+        [SerializeField] public float maxVelocity = 40;
         [field: SerializeField] public Transform RefTransform { get; private set; }
         [field: SerializeField] public Transform BaseRefTransform { get; private set; }
 
@@ -137,6 +138,7 @@ namespace RR.Gameplay.CharacterController
         private void ModifyRigidBody()
         {
             Rigidbody.maxAngularVelocity = maxAngularVelocity;
+            Rigidbody.maxLinearVelocity = maxVelocity;
         }
         #region Reset
 

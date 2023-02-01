@@ -31,5 +31,28 @@ namespace RR.Common
         {
             draw.WireSphere(transform.position, radius);
         }
+        
+        private void OnDrawGizmos()
+        {
+            if (!editorGizmo) return;
+            DrawGizmo();
+        }
+        
+        private void OnDrawGizmosSelected()
+        {
+            if (editorGizmo) return;
+            DrawGizmo();
+        }
+
+        private void DrawGizmo()
+        {
+            var c = gizmoColor;
+            c.a *= 0.1f;
+            Gizmos.color = c;
+            Matrix4x4 trs = Matrix4x4.TRS(transform.position, transform.rotation, Vector3.one);
+            Gizmos.matrix = trs;
+            
+            Gizmos.DrawSphere(Vector3.zero, radius);
+        }
     }
 }

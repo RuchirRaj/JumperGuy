@@ -1,3 +1,4 @@
+using System;
 using Drawing;
 using UnityEngine;
 
@@ -8,7 +9,8 @@ namespace RR.Common
     /// </summary>
     public abstract class GravitySource : MonoBehaviourGizmos
     {
-        public bool editorGizmo, runtimeGizmo;
+        public bool editorGizmo = true, runtimeGizmo;
+        public Color gizmoColor = Color.yellow;
 
         private void OnEnable()
         {
@@ -43,7 +45,7 @@ namespace RR.Common
         public override void DrawGizmos()
         {
             if (!editorGizmo && !GizmoContext.InSelection(this)) return;
-            using (Drawing.Draw.editor.WithColor(Color.yellow))
+            using (Drawing.Draw.editor.WithColor(gizmoColor))
             {
                 Draw(Drawing.Draw.editor);
             }
@@ -52,7 +54,7 @@ namespace RR.Common
         protected void Update()
         {
             if (!runtimeGizmo) return;
-            using (Drawing.Draw.ingame.WithColor(Color.yellow))
+            using (Drawing.Draw.ingame.WithColor(gizmoColor))
             {
                 Draw(Drawing.Draw.ingame);
             }
