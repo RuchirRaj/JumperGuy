@@ -68,7 +68,9 @@ namespace RR.Gameplay.CharacterController.Weapon
         public bool step = true;
         [Min(0)] public float stepVelocityThreshold;
         public Vector3 stepPositionForce = Vector3.down;
+        public CameraSpring.SoftForce stepPositionSoftForce;
         public Vector3 stepRotationTorque = Vector3.right;
+        public CameraSpring.SoftForce stepRotationSoftForce;
         [Range(0, 10)] public float stepForceMultiplier;
         public AnimationCurve stepForceOverSpeed = new()
         {
@@ -192,6 +194,9 @@ namespace RR.Gameplay.CharacterController.Weapon
             var posImp = Vector3.zero;
             var rotImp = Vector3.zero;
 
+            var mul = stepForceMultiplier *
+                      stepForceOverSpeed.Evaluate(relativeVel.magnitude / maxVelocity);
+
             if (elevating && !_bobWasElevating)
             {
                 _bobCount++;
@@ -206,10 +211,19 @@ namespace RR.Gameplay.CharacterController.Weapon
                     rotImp = Vector3.Scale(stepRotationTorque - (stepPositionForce * stepRotationBalance),
                         -Vector3.one + (Vector3.right * 2));	// invert y & z rotation
                 }
+
+                CameraSpring.SoftForce pos = new CameraSpring.SoftForce(
+                    stepPositionSoftForce.time,
+                    mul * (_bobCount % 2 == 0 ? stepPositionBalance : (1 - stepPositionBalance)) *
+                    stepPositionSoftForce.force);
+                CameraSpring.SoftForce rot = new CameraSpring.SoftForce(
+                    stepRotationSoftForce.time,
+                    mul * (_bobCount % 2 == 0 ? stepRotationBalance : (1 - stepRotationBalance)) *
+                    stepRotationSoftForce.force);
+                _weaponSpring.AddSoftPositionForce(pos);
+                _weaponSpring.AddSoftRotationForce(rot);
             }
 
-            var mul = stepForceMultiplier *
-                      stepForceOverSpeed.Evaluate(relativeVel.magnitude / maxVelocity);
             _weaponSpring.AddImpulse(posImp * mul);
             _weaponSpring.AddImpulseTorque(rotImp * mul);
             
