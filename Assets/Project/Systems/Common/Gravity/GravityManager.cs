@@ -91,22 +91,20 @@ namespace RR.Common
             for (var i = 0; i < Sources.Count; i++)
             {
                 var source = Sources[i];
-                
-                if (source.ValidMask(mask) && source.WithinBounds(position))
-                {
-                    if (validSources == 0)
-                        currentMaxPriority = source.priority;
-                    validSources++;
-                    if(source.priority < currentMaxPriority)
-                        continue;
-                    if(source.priority == currentMaxPriority)
-                        gravity += source.GetGravity(position, mask);
-                    else
-                    {
-                        gravity = source.GetGravity(position, mask);
-                        currentMaxPriority = source.priority;
-                    }
 
+                if (!source.ValidMask(mask)) continue;
+                if (validSources == 0)
+                    currentMaxPriority = source.priority;
+                validSources++;
+                if(source.priority < currentMaxPriority)
+                    continue;
+                if (!source.WithinBounds(position)) continue;
+                if(source.priority == currentMaxPriority)
+                    gravity += source.GetGravity(position, mask);
+                else
+                {
+                    gravity = source.GetGravity(position, mask);
+                    currentMaxPriority = source.priority;
                 }
             }
 
