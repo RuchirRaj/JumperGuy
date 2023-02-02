@@ -50,7 +50,12 @@ namespace RR.Gameplay.CharacterController.Camera
         public Vector3 rotationKneelingImpulseDirection = Vector3.forward;
         [Header("Cameras")]
         public List<PlayerCameraBase> cameras = new();
-
+        
+        [Header("Field of View")]
+        public float fovSpeed = 5;
+        public Vector2 cameraFOV = new(80, 90);
+        public Vector2 velocityRange = new(3, 6);
+        
         [Space]
         [CustomTitle("Update", 1f, 0.79f, 0.98f)]
         public UpdateMethod lateUpdate = new() { autoUpdate = true };
@@ -61,6 +66,7 @@ namespace RR.Gameplay.CharacterController.Camera
         private Vector4 _currentBobAmp, _currentBobVal;
         private Vector4 _currentBobTime;
         private CameraSpring _camSpring;
+        private float _fov;
         private int _currentCam;
         private float _currentLowestPos;
         
@@ -119,9 +125,8 @@ namespace RR.Gameplay.CharacterController.Camera
 
         private void Start()
         {
-            //TODO Add a proper way to manage active character reference
-            if (UnityEngine.Camera.main != null)
-                UnityEngine.Camera.main.GetComponent<CinemachineBrain>().WorldUpOverride = _controller.BaseRefTransform;
+            if (MainCamera.Instance)
+                MainCamera.Instance.GetComponent<CinemachineBrain>().WorldUpOverride = _controller.BaseRefTransform;
         }
 
         public void BatchLateUpdate(float dt, float sdt)
@@ -133,11 +138,18 @@ namespace RR.Gameplay.CharacterController.Camera
                 _controller.GroundVel : Vector3.zero;
             UpdateBob(dt, relativeVel);
             UpdateSpring(dt);
-            if (transform.localPosition.y < _currentLowestPos)
-            {
-                _currentLowestPos = transform.localPosition.y;
-                Debug.Log(_currentLowestPos);
-            }
+            UpdateFOV(dt, relativeVel);
+        }
+
+        private void UpdateFOV(float dt, Vector3 relativeVel)
+        {
+            //TODO Add Target FOV according to player state
+            //Placeholder logic
+            var vel = relativeVel.magnitude;
+            _fov = Mathf.Clamp(Mathf.Lerp(_fov, Mathf.Clamp(vel, velocityRange.x, velocityRange.y)
+                    .Remap(velocityRange.x, velocityRange.y, cameraFOV.x, cameraFOV.y), fovSpeed * dt), cameraFOV.x,
+                cameraFOV.y);
+            cameras[_currentCam].SetFOV(_fov);
         }
 
         private void UpdateSpring(float dt)

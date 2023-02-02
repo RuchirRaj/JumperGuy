@@ -29,5 +29,11 @@ namespace RR.Gameplay.CharacterController.Camera
         /// <param name="value"></param>
         /// <param name="characterController"></param>
         public abstract void SetActive(bool value, CharacterController characterController);
+
+        /// <summary>
+        /// Update the FOV value on target camera
+        /// </summary>
+        /// <param name="value"></param>
+        public abstract void SetFOV(float value);
     }
 }

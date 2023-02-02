@@ -49,5 +49,9 @@ namespace RR.Gameplay.CharacterController.Camera
                 return;
             controller.InputState.INPUT_ForwardRotation(_camera.State.RawOrientation);
         }
+        public override void SetFOV(float value)
+        {
+            _camera.Lens.FieldOfView = value;
+        }
     }   
 }

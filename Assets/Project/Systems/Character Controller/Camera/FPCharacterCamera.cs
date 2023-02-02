@@ -1,4 +1,5 @@
 ﻿using Cinemachine;
+using RR.Utils;
 using UnityEngine;
 
 namespace RR.Gameplay.CharacterController.Camera
@@ -66,6 +67,11 @@ namespace RR.Gameplay.CharacterController.Camera
 
             _active = value;
             _camera.enabled = value;
+        }
+
+        public override void SetFOV(float value)
+        {
+            _camera.Lens.FieldOfView = value;
         }
 
 
