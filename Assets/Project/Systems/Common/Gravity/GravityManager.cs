@@ -87,14 +87,16 @@ namespace RR.Common
         {
             var gravity = Vector3.zero;
             var currentMaxPriority = 0;
+            var validSources = 0;
             for (var i = 0; i < Sources.Count; i++)
             {
                 var source = Sources[i];
-                if (i == 0)
-                    currentMaxPriority = source.priority;
-
-                if (source.WithinBounds(position))
+                
+                if (source.ValidMask(mask) && source.WithinBounds(position))
                 {
+                    if (validSources == 0)
+                        currentMaxPriority = source.priority;
+                    validSources++;
                     if(source.priority < currentMaxPriority)
                         continue;
                     if(source.priority == currentMaxPriority)
@@ -104,6 +106,7 @@ namespace RR.Common
                         gravity = source.GetGravity(position, mask);
                         currentMaxPriority = source.priority;
                     }
+
                 }
             }
 

@@ -10,7 +10,6 @@ namespace RR.Common
     {
         public Vector3 direction = Vector3.down;
         public float gravity = 10;
-        public GravityManager.GravityMask mask = (GravityManager.GravityMask)1;
 
 
         public override Vector3 GetGravity(Vector3 position, GravityManager.GravityMask mask)

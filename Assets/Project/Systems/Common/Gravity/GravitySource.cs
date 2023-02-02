@@ -12,7 +12,8 @@ namespace RR.Common
         public int priority = 0;
         public bool editorGizmo = true, runtimeGizmo;
         public Color gizmoColor = Color.yellow;
-
+        public GravityManager.GravityMask mask = (GravityManager.GravityMask)1;
+        
         private void OnEnable()
         {
             GravityManager.GetInstance().RegisterSource(this);
@@ -42,6 +43,11 @@ namespace RR.Common
         /// <param name="pos"></param>
         /// <returns>"True" if the position is within bounds</returns>
         public abstract bool WithinBounds(Vector3 pos);
+
+        public virtual bool ValidMask(GravityManager.GravityMask mask)
+        {
+            return (this.mask & mask) != 0;
+        }
 
         public override void DrawGizmos()
         {

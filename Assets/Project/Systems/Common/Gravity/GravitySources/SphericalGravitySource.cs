@@ -10,7 +10,7 @@ namespace RR.Common
         public AnimationCurve gravity;
         public float gravityMultiplier = -10;
         public float radius = 10;
-        public GravityManager.GravityMask mask = (GravityManager.GravityMask)1;
+        
 
         public override Vector3 GetGravity(Vector3 position, GravityManager.GravityMask mask)
         {
