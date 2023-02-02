@@ -86,11 +86,27 @@ namespace RR.Common
         public Vector3 GetGravityAtPos(Vector3 position, GravityMask mask)
         {
             var gravity = Vector3.zero;
-            foreach (var source in Sources)
+            var currentMaxPriority = 0;
+            for (var i = 0; i < Sources.Count; i++)
             {
-                if(source.WithinBounds(position))
-                    gravity += source.GetGravity(position, mask);
+                var source = Sources[i];
+                if (i == 0)
+                    currentMaxPriority = source.priority;
+
+                if (source.WithinBounds(position))
+                {
+                    if(source.priority < currentMaxPriority)
+                        continue;
+                    if(source.priority == currentMaxPriority)
+                        gravity += source.GetGravity(position, mask);
+                    else
+                    {
+                        gravity = source.GetGravity(position, mask);
+                        currentMaxPriority = source.priority;
+                    }
+                }
             }
+
             return gravity;
         }
     }   

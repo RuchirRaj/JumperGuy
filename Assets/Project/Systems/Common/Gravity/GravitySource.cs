@@ -9,6 +9,7 @@ namespace RR.Common
     /// </summary>
     public abstract class GravitySource : MonoBehaviourGizmos
     {
+        public int priority = 0;
         public bool editorGizmo = true, runtimeGizmo;
         public Color gizmoColor = Color.yellow;
 
