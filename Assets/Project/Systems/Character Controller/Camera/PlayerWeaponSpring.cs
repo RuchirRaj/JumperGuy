@@ -120,7 +120,7 @@ namespace RR.Gameplay.CharacterController.Weapon
         {
             _controller = GetComponentInParent<CharacterController>();
             _weaponSpring ??= new CameraSpring();
-            _shakeNoise ??= new FastNoiseLite();
+            _shakeNoise ??= new FastNoiseLite((int)Time.time);
             this.RegisterLateUpdate(lateUpdate);
             _controller.OnGroundImpact += ControllerOnGroundImpact;
         }

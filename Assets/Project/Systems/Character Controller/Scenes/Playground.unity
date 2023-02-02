@@ -2964,10 +2964,10 @@ MonoBehaviour:
   maxPositionKneelingImpulse: 20
   maxRotationKneelingImpulse: 2
   rotationKneelingImpulseDirection: {x: 0, y: 0, z: 1}
-  shakeSpeed: 2
+  shakeSpeed: 1
   shakeFrequency: 0.25
   shakeAmplitude: {x: 2.5, y: 2.5, z: 5}
-  shakeMultiplier: 1
+  shakeMultiplier: 0.75
   shakeNoiseType: 3
   shakeNoiseFractalType: 0
   lateUpdate:
@@ -3070,7 +3070,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 525255651}
-  m_LocalRotation: {x: -0.096109346, y: 0.8668741, z: -0.18377963, w: -0.45334026}
+  m_LocalRotation: {x: -0.09610935, y: 0.8668741, z: -0.18377963, w: -0.45334026}
   m_LocalPosition: {x: 3.4931605, y: 4.7199993, z: 25.030275}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -8841,9 +8841,6 @@ MonoBehaviour:
     inputValue: 0
     outValue: 0
     range: {x: -90, y: 90}
-  fovSpeed: 5
-  cameraFOV: {x: 80, y: 90}
-  velocityRange: {x: 2, y: 6}
   controller: {fileID: 2043942194}
   lockMode: 1
   hideCursor: 1
@@ -13031,6 +13028,12 @@ MonoBehaviour:
     damper: 0.75
   minCamHeight: 0.25
   maxVelocity: 6
+  shakeSpeed: 1
+  shakeFrequency: 0.25
+  shakeAmplitude: {x: 0.5, y: 0.5, z: 0}
+  shakeMultiplier: 1
+  shakeNoiseType: 3
+  shakeNoiseFractalType: 1
   bob: 1
   bobAmpMultiplier: 1
   bobMultiplierOverSpeed:
@@ -13101,6 +13104,9 @@ MonoBehaviour:
   cameras:
   - {fileID: 1438878011}
   - {fileID: 525255656}
+  fovSpeed: 5
+  cameraFOV: {x: 70, y: 90}
+  velocityRange: {x: 0, y: 6}
   lateUpdate:
     autoUpdate: 1
     slicedUpdate: 0

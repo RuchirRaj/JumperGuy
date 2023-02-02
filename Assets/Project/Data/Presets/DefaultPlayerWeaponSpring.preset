@@ -79,7 +79,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: pivotOffset.x
-    value: 0.15
+    value: 0.1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: pivotOffset.y
@@ -315,7 +315,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobAmplitude.z
-    value: 0.75
+    value: 0.4
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: bobAmplitude.w
@@ -343,7 +343,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: swayMultiplier
-    value: 6
+    value: 3
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: swayLookMultiplier.x
@@ -394,8 +394,16 @@ Preset:
     value: 3
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: positionFallRetract
-    value: 1
+    propertyPath: positionFallRetract.x
+    value: 0.1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: positionFallRetract.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: positionFallRetract.z
+    value: -1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: positionWalkSlide.x
@@ -430,6 +438,26 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: stepPositionSoftForce.force.x
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepPositionSoftForce.force.y
+    value: -10
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepPositionSoftForce.force.z
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepPositionSoftForce.time
+    value: 0.2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepPositionSoftForce.currentTime
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: stepRotationTorque.x
     value: 1
     objectReference: {fileID: 0}
@@ -442,8 +470,28 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: stepRotationSoftForce.force.x
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepRotationSoftForce.force.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepRotationSoftForce.force.z
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepRotationSoftForce.time
+    value: 0.2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: stepRotationSoftForce.currentTime
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: stepForceMultiplier
-    value: 1
+    value: 0.5
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: stepForceOverSpeed.m_Curve.Array.size
@@ -559,7 +607,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: shakeSpeed
-    value: 2
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: shakeFrequency
@@ -579,7 +627,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: shakeMultiplier
-    value: 1
+    value: 0.75
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: shakeNoiseType

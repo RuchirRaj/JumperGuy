@@ -16,6 +16,13 @@ namespace RR.Gameplay.CharacterController.Camera
         
         public float minCamHeight = 0.1f;
         public float maxVelocity = 5;
+        [Header("Shake")] 
+        [Range(0, 10)] public float shakeSpeed = 2;
+        [Range(0, 10)] public float shakeFrequency = 0.25f;
+        public Vector3 shakeAmplitude = Vector3.zero;
+        [Range(0,50)] public float shakeMultiplier = 1;
+        public FastNoiseLite.NoiseType shakeNoiseType = FastNoiseLite.NoiseType.Perlin;
+        public FastNoiseLite.FractalType shakeNoiseFractalType = FastNoiseLite.FractalType.FBm;
         [Header("Bob")] 
         public bool bob = true;
         [Range(0,10)] public float bobAmpMultiplier = 1;
@@ -65,6 +72,9 @@ namespace RR.Gameplay.CharacterController.Camera
         private float _bobSpeed, _lastBobSpeed;
         private Vector4 _currentBobAmp, _currentBobVal;
         private Vector4 _currentBobTime;
+        private float _shakeTime;
+        private Vector3 _shake;
+        private FastNoiseLite _shakeNoise;
         private CameraSpring _camSpring;
         private float _fov;
         private int _currentCam;
@@ -80,6 +90,7 @@ namespace RR.Gameplay.CharacterController.Camera
             _controller.InputState.onCamEvent += OnCamEvent;
             _controller.OnGroundImpact += ControllerOnGroundImpact;
             _currentLowestPos = Mathf.Infinity;
+            _shakeNoise ??= new FastNoiseLite((int)Time.time);
             this.RegisterLateUpdate(lateUpdate);
             if (!MainCamera.Instance)
             {
@@ -137,7 +148,9 @@ namespace RR.Gameplay.CharacterController.Camera
                 Vector3.ProjectOnPlane(_controller.Rigidbody.velocity, _controller.Base.Sensor.averageHit.normal) -
                 _controller.GroundVel : Vector3.zero;
             UpdateBob(dt, relativeVel);
+            UpdateShake(dt);
             UpdateSpring(dt);
+            
             UpdateFOV(dt, relativeVel);
         }
 
@@ -205,6 +218,30 @@ namespace RR.Gameplay.CharacterController.Camera
                 ForceMode.Force, dt);
             _camSpring.AddTorque(Vector3.forward * (_currentBobVal.w * bobAmpMultiplier),
                 ForceMode.Force, dt);
+        }
+        
+        /// <summary>
+        /// updates the procedural shaking of the weapon.
+        /// this is a purely aesthetic motion to breathe life into the first
+        /// person arm / weapon. if one wanted to expand on this, one could
+        /// alternate between higher and lower speeds and amplitudes.
+        /// </summary>
+        private void UpdateShake(float dt)
+        {
+            // apply weapon shake
+            if (shakeSpeed != 0.0f)
+            {
+                _shakeNoise.SetNoiseType(shakeNoiseType);
+                _shakeNoise.SetFractalType(shakeNoiseFractalType);
+                _shakeNoise.SetFrequency(shakeFrequency);
+                
+                _shakeTime += shakeSpeed * dt;
+                _shake = Vector3.Scale(
+                    MathUtils.Noise.Random(_shakeNoise, _shakeTime)
+                    // .Remap(Vector3.zero, Vector3.one, -Vector3.one, Vector3.one)
+                    , shakeAmplitude) * (shakeMultiplier * 10);
+                _camSpring.AddTorque(_shake, ForceMode.Force, dt);
+            }
         }
 
         /// <summary>
