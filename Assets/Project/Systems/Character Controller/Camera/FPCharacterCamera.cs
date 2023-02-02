@@ -30,6 +30,7 @@ namespace RR.Gameplay.CharacterController.Camera
         [SerializeField] [Space] private CharacterController controller;
         [Space] public CursorLockMode lockMode = CursorLockMode.Confined;
         public bool hideCursor;
+        [SerializeField] private UnityEngine.Camera weaponCamera;
         
         //Private
         private bool _active;
@@ -57,6 +58,9 @@ namespace RR.Gameplay.CharacterController.Camera
                         panAxis.outValue = controller.RefTransform.localRotation.eulerAngles.y;
                 }
             }
+
+            if (weaponCamera)
+                weaponCamera.enabled = value;
             _active = value;
             _camera.enabled = value;
         }

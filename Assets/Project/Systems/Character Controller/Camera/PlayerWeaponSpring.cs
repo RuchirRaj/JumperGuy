@@ -61,7 +61,7 @@ namespace RR.Gameplay.CharacterController.Weapon
         public Vector3 rotationFallSway = Vector3.one;
         public float rotationSlopeSway = 1;
         [Space]
-        [Range(0, 10)]public float positionFallRetract = 1;
+        public Vector3 positionFallRetract = Vector3.back;
         public Vector3 positionWalkSlide = Vector3.one;
 
         [Header("Step")] 
@@ -310,7 +310,7 @@ namespace RR.Gameplay.CharacterController.Weapon
             var force = Vector3.zero;
 
             // drag weapon towards ourselves
-            force += Vector3.forward * -Mathf.Abs(localVelocity.y * positionFallRetract);
+            force += positionFallRetract * Mathf.Abs(localVelocity.y);
 
             // --- weapon strafe & walk slide ---
             // PositionWalkSlide x will slide sideways when strafing
