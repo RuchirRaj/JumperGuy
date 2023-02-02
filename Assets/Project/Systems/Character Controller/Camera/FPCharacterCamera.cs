@@ -1,6 +1,4 @@
 ﻿using Cinemachine;
-using RR.Attributes;
-using RR.UpdateSystem;
 using UnityEngine;
 
 namespace RR.Gameplay.CharacterController.Camera
@@ -60,7 +58,12 @@ namespace RR.Gameplay.CharacterController.Camera
             }
 
             if (weaponCamera)
+            {
                 weaponCamera.enabled = value;
+                if (MainCamera.Instance)
+                    MainCamera.Instance.CameraData.renderPostProcessing = !value;
+            }
+
             _active = value;
             _camera.enabled = value;
         }

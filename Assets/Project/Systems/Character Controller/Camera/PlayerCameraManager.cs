@@ -75,6 +75,10 @@ namespace RR.Gameplay.CharacterController.Camera
             _controller.OnGroundImpact += ControllerOnGroundImpact;
             _currentLowestPos = Mathf.Infinity;
             this.RegisterLateUpdate(lateUpdate);
+            if (!MainCamera.Instance)
+            {
+                if (UnityEngine.Camera.main != null) UnityEngine.Camera.main.gameObject.AddComponent<MainCamera>();
+            }
             SetActiveCamera(_currentCam, true);
         }
 
