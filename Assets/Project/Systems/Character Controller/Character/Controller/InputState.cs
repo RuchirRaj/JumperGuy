@@ -15,7 +15,12 @@ namespace RR.Gameplay.CharacterController
         [field: SerializeField] public bool DashPressed { get; private set; }
         [field: SerializeField] public Vector2 Move { get; private set; }
         [field: SerializeField] public Quaternion ForwardRotation { get; private set; }
-        
+
+        public Matrix4x4 RefTRS { get; private set; } = new Matrix4x4();
+        public Matrix4x4 LocalToWorldDirection => RefTRS;
+        public Matrix4x4 WorldToLocalDirection => RefTRS.inverse;
+        public Vector3 Position { get; private set; }
+
         //Events
         public Action<bool> onCrouchEvent;
         public Action<bool> onRunEvent;
@@ -107,6 +112,7 @@ namespace RR.Gameplay.CharacterController
         public void INPUT_ForwardRotation(Quaternion value)
         {
             ForwardRotation = value;
+            RefTRS = Matrix4x4.TRS(Position, ForwardRotation, Vector3.one);
         }
         
         //Reset 

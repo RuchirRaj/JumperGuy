@@ -284,7 +284,8 @@ namespace RR.Gameplay.CharacterController.Weapon
             // RotationStrafeSway x will rotate up when strafing (it can't push down)
             // RotationStrafeSway y will rotate sideways when strafing
             // RotationStrafeSway z will twist weapon around the forward vector when strafing
-            var localVelocity = _controller.RefTransform.InverseTransformDirection(vel);
+            // var localVelocity = Quaternion.Inverse(_controller.InputState.ForwardRotation) * vel;
+            var localVelocity = (_controller.InputState.WorldToLocalDirection) * vel;
             if (grounded)
                 torque += new Vector3(
                     -Mathf.Abs(localVelocity.x * rotationStrafeSway.x),
