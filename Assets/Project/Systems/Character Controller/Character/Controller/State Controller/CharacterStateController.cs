@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace RR.Gameplay.CharacterController.StateController
 {
@@ -11,7 +12,11 @@ namespace RR.Gameplay.CharacterController.StateController
         private CharacterBase _base;
         
         public float test;
-        
+
+        public event Action<PlayerStateBase, PlayerStateBase> StateChanged; 
+        public event Action<PlayerStateBase> StateEntered;
+        public event Action<PlayerStateBase> StateExited;
+
         private void OnEnable()
         {
             _controller = GetComponent<CharacterController>();
