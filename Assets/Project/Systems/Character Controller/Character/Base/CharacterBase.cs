@@ -430,6 +430,16 @@ namespace RR.Gameplay.CharacterController
 
         #region Public Function
 
+        public void SetRotationSpring(SpringSettings s)
+        {
+            RotationSpring = s;
+        }
+        
+        public void SetPositionSpring(SpringSettings s)
+        {
+            PositionSpring = s;
+        }
+        
         public float GetSlope(Vector3 normal) => Vector3.Angle(normal, RefTransform.up);
         
         /// <summary>

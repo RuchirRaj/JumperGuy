@@ -22,7 +22,7 @@ namespace RR.Gameplay.CharacterController.Camera
         
         public override bool Active => _active;
 
-        [Space(10)]
+        [Space(10)] 
         public Axis panAxis = DefaultPan;
         public Axis tiltAxis = DefaultTilt;
 
@@ -47,14 +47,15 @@ namespace RR.Gameplay.CharacterController.Camera
             if (value)
             {
                 controller.lookDirection = CharacterController.LookDirection.Custom;
-                
                 if(!_active)
                 {
                     Cursor.lockState = lockMode;
                     Cursor.visible = hideCursor;
                     panAxis.Reset();
-                    if(controller.RefTransform)
-                        panAxis.outValue = controller.RefTransform.localRotation.eulerAngles.y;
+                    var rotation = transform.rotation.eulerAngles;
+                    panAxis.outValue = rotation.y;
+                    tiltAxis.Reset();
+                    tiltAxis.outValue = rotation.x;
                 }
             }
 
@@ -78,16 +79,16 @@ namespace RR.Gameplay.CharacterController.Camera
         public override void BatchLateUpdate(float dt, float sdt)
         {
             if(!_active) return;
-            panAxis.outValue = controller.RefTransform.localRotation.eulerAngles.y;
+            var tr = transform;
+            panAxis.outValue = tr.localRotation.eulerAngles.y;
             panAxis.SetInput(controller.InputState.Look.x);
             panAxis.ProcessInput(dt);
 
             tiltAxis.SetInput(controller.InputState.Look.y);
             tiltAxis.ProcessInput(dt);
-            transform.localRotation = Quaternion.Euler(tiltAxis.outValue, 0, 0);
-            controller.RefTransform.localRotation = Quaternion.Euler(0, panAxis.outValue, 0);
+            tr.localRotation = Quaternion.Euler(tiltAxis.outValue, panAxis.outValue, 0);
 
-            controller.InputState.INPUT_ForwardRotation(transform.rotation);
+            controller.InputState.INPUT_ForwardRotation(tr.rotation);
         }
     }
 }

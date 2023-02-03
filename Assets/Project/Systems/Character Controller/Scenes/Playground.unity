@@ -8815,12 +8815,12 @@ MonoBehaviour:
     slicedUpdate: 0
     bucketCount: 0
   panAxis:
-    maxSpeed: 800
+    maxSpeed: 1200
     gain: 12
     clamp: {x: -180, y: 180}
     wrap: 1
-    accelTime: 0.05
-    decelTime: 0.05
+    accelTime: 0.01
+    decelTime: 0.01
     recenter: 0
     recenterWait: 2
     recenterTime: 1
@@ -8829,12 +8829,12 @@ MonoBehaviour:
     outValue: 0
     range: {x: -180, y: 180}
   tiltAxis:
-    maxSpeed: 800
+    maxSpeed: 1200
     gain: -12
-    clamp: {x: -80, y: 80}
+    clamp: {x: -85, y: 85}
     wrap: 0
-    accelTime: 0.05
-    decelTime: 0.05
+    accelTime: 0.01
+    decelTime: 0.01
     recenter: 1
     recenterWait: 10
     recenterTime: 1
@@ -18817,7 +18817,7 @@ MonoBehaviour:
   <RotationSpring>k__BackingField:
     useForce: 0
     frequency: 10
-    damper: 0.75
+    damper: 1
   <TorqueScale>k__BackingField: {x: 1, y: 1, z: 1}
   <TorqueClamp>k__BackingField: 100
   <ShapeColliderType>k__BackingField: 0
