@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using RR.Attributes;
-using RR.StateSystem;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace RR.Gameplay.CharacterController.StateController
 {
