@@ -17,6 +17,8 @@ namespace RR.Gameplay.CharacterController
 
         void CCInput_OnEnable()
         {
+            InputState.SetRefTransform(RefTransform);
+            playerInput ??= GetComponent<PlayerInput>();
             if(playerInput)
                 playerInput.onActionTriggered += PlayerInputOnActionTriggered;
         }
@@ -66,10 +68,18 @@ namespace RR.Gameplay.CharacterController
             InputState.ResetState();
         }
 
-        public void UpdateForwardDirection(Quaternion direction)
+        private void CCInput_FixedUpdate(float dt)
         {
-            //TODO move forward rotation to its own function
-            inputState.INPUT_ForwardRotation(direction);
+            InputState.INPUT_Position(RefTransform.position);
+        }
+
+        /// <summary>
+        /// Update the direction camera is pointing at
+        /// </summary>
+        /// <param name="camRotation">The rotation of camera in global space</param>
+        public void INPUT_ForwardDirection(Quaternion camRotation)
+        {
+            inputState.INPUT_CameraRotation(camRotation);
         }
 
         public void OnMove(InputAction.CallbackContext context)

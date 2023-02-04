@@ -181,7 +181,7 @@ namespace RR.Gameplay.CharacterController
 
             if (_horizontalInputsDetected)
             {
-                _moveDirection = inputState.ForwardRotation * _moveInput;
+                _moveDirection = inputState.CameraRotation * _moveInput;
                 _moveDirection = Vector3.ProjectOnPlane(_moveDirection, RefRotation * Vector3.up).normalized;
             }
         }
@@ -197,11 +197,11 @@ namespace RR.Gameplay.CharacterController
                         _targetRotFwdDirection = _moveDirection;
                     break;
                 case LookDirection.InputDirection:
-                    _targetRotFwdDirection = inputState.ForwardRotation * Vector3.forward;
+                    _targetRotFwdDirection = inputState.CameraRotation * Vector3.forward;
                     break;
                 case LookDirection.InputWhenMovementDetected:
                     if (_horizontalInputsDetected)
-                        _targetRotFwdDirection = inputState.ForwardRotation * Vector3.forward;
+                        _targetRotFwdDirection = inputState.CameraRotation * Vector3.forward;
                     break;
                 case LookDirection.Custom:
                 default: //Custom

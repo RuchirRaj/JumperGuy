@@ -14,12 +14,26 @@ namespace RR.Gameplay.CharacterController
         [field: SerializeField] public bool RunPressed { get; private set; }
         [field: SerializeField] public bool DashPressed { get; private set; }
         [field: SerializeField] public Vector2 Move { get; private set; }
-        [field: SerializeField] public Quaternion ForwardRotation { get; private set; }
+        [field: SerializeField] public Quaternion CameraRotation { get; private set; }
 
-        public Matrix4x4 RefTRS { get; private set; } = new Matrix4x4();
-        public Matrix4x4 LocalToWorldDirection => RefTRS;
-        public Matrix4x4 WorldToLocalDirection => RefTRS.inverse;
+        /// <summary>
+        /// Transform local position to world space co-ordinates
+        /// </summary>
+        /// <remarks>This is unaffected by camera's tilt axis and shaking</remarks>
+        /// <remarks>Use this instead of relying on refTransform's TRS</remarks>
+        public Matrix4x4 LocalToWorldPoint { get; private set; }
+        public Matrix4x4 WorldToLocalPoint => LocalToWorldPoint.inverse;
+        
+        /// <summary>
+        /// Transform local direction to world space direction
+        /// </summary>
+        /// <remarks>This is unaffected by camera's tilt axis and shaking</remarks>
+        /// <remarks>Use this instead of relying on refTransform's TRS</remarks>
+        public Matrix4x4 LocalToWorldDirection { get; private set; }
+        public Matrix4x4 WorldToLocalDirection => LocalToWorldDirection.inverse;
         public Vector3 Position { get; private set; }
+        
+        public Transform RefTransform { get; private set; }
 
         //Events
         public Action<bool> onCrouchEvent;
@@ -48,13 +62,19 @@ namespace RR.Gameplay.CharacterController
             RunPressed = source.RunPressed;
             DashPressed = source.DashPressed;
             Move = source.Move;
-            ForwardRotation = source.ForwardRotation;
+            CameraRotation = source.CameraRotation;
             
             onJumpTuple = source.onJumpTuple;
             onCamTuple = source.onCamTuple;
             onRunTuple = source.onRunTuple;
             onDashTuple = source.onDashTuple;
             onCrouchTuple = source.onCrouchTuple;
+        }
+
+
+        public void SetRefTransform(Transform tr)
+        {
+            RefTransform = tr;
         }
         
         //TODO Add events for start and cancel
@@ -109,12 +129,20 @@ namespace RR.Gameplay.CharacterController
             CrouchPressed = value;
         }
 
-        public void INPUT_ForwardRotation(Quaternion value)
+        public void INPUT_CameraRotation(Quaternion value)
         {
-            ForwardRotation = value;
-            RefTRS = Matrix4x4.TRS(Position, ForwardRotation, Vector3.one);
+            CameraRotation = value;
+            LocalToWorldDirection = Matrix4x4.TRS(Vector3.zero, 
+                Quaternion.LookRotation(CameraRotation * Vector3.forward, RefTransform.up), Vector3.one);
         }
-        
+
+        public void INPUT_Position(Vector3 refTransformPosition)
+        {
+            Position = refTransformPosition;
+            LocalToWorldPoint = Matrix4x4.TRS(Position,
+                Quaternion.LookRotation(CameraRotation * Vector3.forward, RefTransform.up), Vector3.one);
+        }
+
         //Reset 
         public void ResetState()
         {

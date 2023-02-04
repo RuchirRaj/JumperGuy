@@ -41,6 +41,7 @@ namespace RR.Gameplay.CharacterController
 
         public void BatchFixedUpdate(float dt, float sdt)
         {
+            CCInput_FixedUpdate(dt);
             CCState_FixedUpdate();
             CCController_FixedUpdate(dt, sdt);
         }

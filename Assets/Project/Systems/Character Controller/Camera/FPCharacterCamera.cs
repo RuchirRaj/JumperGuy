@@ -88,7 +88,7 @@ namespace RR.Gameplay.CharacterController.Camera
             tiltAxis.ProcessInput(dt);
             tr.localRotation = Quaternion.Euler(tiltAxis.outValue, panAxis.outValue, 0);
 
-            controller.InputState.INPUT_ForwardRotation(tr.rotation);
+            controller.INPUT_ForwardDirection(tr.rotation);
         }
     }
 }
